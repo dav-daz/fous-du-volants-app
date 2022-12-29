@@ -5,9 +5,9 @@
   -->
 
   <div class="tools">
-    <button class="btn-init" @click="loadModal('resetPlayers')" type="button">Initialiser</button>
-    <p>Nombre de joueurs sélectionnés: {{ playersSelected.length }}</p>
-    <button class="btn-add" @click="loadModal('addNewPlayers')" type="button">Ajouter des joueurs</button>
+    <button class="btn-init" @click="loadModal('resetPlayers')" type="button" v-html="texts.button.initialiser"></button>
+    <p>{{ texts.nbr_joueurs_select }} {{ playersSelected.length }}</p>
+    <button class="btn-add" @click="loadModal('addNewPlayers')" type="button" v-html="texts.button.add_news_players"></button>
   </div>
 
   <div class="all-persons-list">
@@ -18,9 +18,9 @@
           class="all-persons-list-item"
       >
         <div class="all-persons-list-buttons">
-          <button @click="addPlayer(player)" class="button-add" type="button">ajouter</button>
+          <button @click="addPlayer(player)" class="button-add" type="button" v-html="texts.button.add_player"></button>
           <p class="all-persons-list-name">{{ player.nom }}</p>
-          <button @click="deletePlayer(player)" class="button-delete" type="button">retirer</button>
+          <button @click="deletePlayer(player)" class="button-delete" type="button" v-html="texts.button.delete_player"></button>
         </div>
       </li>
     </ul>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import content from './data/content.json';
 import Modal from './components/Modal.vue';
 import addNewPlayers  from './components/addNewPlayers';
 import resetPlayers from "@/components/resetPlayers";
@@ -55,20 +56,19 @@ export default {
   },
   data() {
     return {
+      texts: {
+        nbr_joueurs_select: content.home.nbr_joueurs_select,
+        button: {
+          add_player: content.button.add_player,
+          delete_player: content.button.delete_player,
+          add_news_players: content.button.add_news_players,
+          initialiser: content.button.initialiser
+        }
+      },
       showModal: false,
       componentInModal: '',
       playersSelected: [],
-      registeredPersons : [
-        { id : 1, nom :'Alex', equipe: [], adv : [] },
-        { id : 2, nom :'Armel', equipe: [], adv : [] },
-        { id : 3, nom :'Arnault', equipe: [], adv : [] },
-        { id : 4, nom :'Bertrand',  equipe: [], adv : [] },
-        { id : 5, nom :'Bruno', equipe: [], adv : [] },
-        { id : 6, nom :'David', equipe: [], adv : [] },
-        { id : 7, nom :'Didier', equipe: [], adv : [] },
-        { id : 8, nom :'Dimitri', equipe: [], adv : [] },
-        { id : 9, nom :'Elodie', equipe: [], adv : [] }
-      ],
+      registeredPersons : content.registeredPersons,
       newPlayers: []
     }
   },

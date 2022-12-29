@@ -10,7 +10,8 @@
             <button
                 class="modal-default-button"
                 @click="$emit('close')"
-            >Fermer</button>
+                v-html="texts.button.modal_close"
+            ></button>
           </div>
 
           <div class="modal-body">
@@ -27,9 +28,20 @@
 
 
 <script>
+import content from './../data/content.json';
+
 export default {
   props: {
     show: Boolean
+  },
+  data() {
+    return {
+      texts: {
+        button: {
+          modal_close: content.button.modal_close
+        }
+      },
+    }
   }
 }
 </script>

@@ -1,0 +1,73 @@
+{
+  "home": {
+    "nbr_joueurs_select": "Nombre de joueurs sélectionnés:"
+  },
+  "add_new_player": {
+    "title": "Ajouter des nouveaux joueurs"
+  },
+  "button": {
+    "add_player": "Ajouter",
+    "delete_player": "Retirer",
+    "add_news_players": "Ajouter des joueurs",
+    "initialiser": "Initialiser",
+    "modal_close": "Fermer",
+    "init_confirm": "Oui",
+    "add_to_list": "Ajouter à la liste"
+  },
+  "registeredPersons" : [
+    {
+      "id" : 1,
+      "nom" :"Alex",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 2,
+      "nom" :"Armel",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 3,
+      "nom" :"Arnault",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 4,
+      "nom" : "Bertrand",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 5,
+      "nom" : "Bruno",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 6,
+      "nom" : "David",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 7,
+      "nom" : "Didier",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 8,
+      "nom" : "Dimitri",
+      "equipe" : [],
+      "adv" : []
+    },
+    {
+      "id" : 9,
+      "nom" : "Elodie",
+      "equipe": [],
+      "adv" : []
+    }
+  ]
+}

@@ -14,15 +14,23 @@
         <button v-show="k || ( !k && newPlayers.length > 1)" @click="removeField(k)" type="button">-</button>
       </div>
     </div>
-    <button @click="sendNewPlayers" type="button">Ajouter à la liste</button>
+    <button @click="sendNewPlayers" type="button" v-html="texts.button.add_to_list"></button>
   </form>
 </template>
 
 <script>
+import content from './../data/content.json';
+
 export default {
   name: "addNewPlayers.vue",
   data() {
     return {
+      texts: {
+        "title": content.add_new_player.title,
+        button: {
+          add_to_list: content.button.add_to_list
+        }
+      },
       newPlayers: [
         { nom :'' }
       ],
