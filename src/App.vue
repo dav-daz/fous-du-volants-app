@@ -18,9 +18,9 @@
           class="all-persons-list-item"
       >
         <div class="all-persons-list-buttons">
-          <button @click="addPlayer(player)" class="button-add" type="button" v-html="texts.button.add_player"></button>
+          <button @click="addPlayer(player)" class="button-add" type="button"><fa-icon icon="user-plus" size="2x" /></button>
           <p class="all-persons-list-name">{{ player.nom }}</p>
-          <button @click="deletePlayer(player)" class="button-delete" type="button" v-html="texts.button.delete_player"></button>
+          <button @click="deletePlayer(player)" class="button-delete" type="button"><fa-icon icon="user-minus" size="2x" /></button>
         </div>
       </li>
     </ul>
