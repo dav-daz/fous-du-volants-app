@@ -1,0 +1,29 @@
+@import '@/assets/styles/_variables.scss';
+
+/// Base font-size for html equates to 10px : allows using rem font-sizes everywhere by dividing / 10.
+/// Ex : 2rem will equate to 20px.
+html {
+  font-size: 0.625em;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $ff-default;
+  background-color: $c-white;
+  font-size: 1.6rem;
+}
+
+ul,
+ol,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  flex: none; // for ie 11
+}

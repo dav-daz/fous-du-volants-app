@@ -210,46 +210,32 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-
-  ul,
-  li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
   .tools {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    gap: 1.5rem;
   }
 
   .all-persons-list {
     text-align: center;
 
     &-item {
-      background-color: red;
-      margin-bottom: 10px;
-      color: #fff;
+      background-color: $c-red;
+      margin-bottom: 1rem;
+      color: $c-white;
       font-weight: 700;
-      padding: 5px;
+      padding: 0.5rem;
 
       &.selected {
-        background-color: green;
+        background-color: $c-green;
       }
     }
 
     &-buttons {
       display: flex;
       justify-content: space-between;
-      gap: 30px;
+      gap: 3rem;
     }
   }
 
