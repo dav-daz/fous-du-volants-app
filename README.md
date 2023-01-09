@@ -15,6 +15,15 @@ npm run serve
 npm run build
 ```
 
+### Tester l'application compilée avec le package npm serve
+```
+// installer le package 
+npm install -g serve
+
+// lancer le serveur 
+serve -s chemin_vers_dist
+```
+
 ### Lints and fixes files
 ```
 npm run lint
