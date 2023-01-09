@@ -1,10 +1,16 @@
 <template>
-  <h3>Initialiser ?</h3>
-  <button
-      class="modal-default-button reset"
-      @click="$emit('reset')"
-      v-html="texts.button.init_confirm"
-  ></button>
+  <h3 class="modal-title">Initialiser ?</h3>
+
+  <div class="modal-footer">
+    <button
+        class="btn-modal"
+        @click="$emit('close')"
+        v-html="texts.button.modal_close"></button>
+    <button
+        class="btn-modal"
+        @click="$emit('reset')"
+        v-html="texts.button.init_confirm"></button>
+  </div>
 </template>
 
 <script>
@@ -17,7 +23,8 @@ export default {
     return {
       texts: {
         button: {
-          init_confirm: content.button.init_confirm
+          init_confirm: content.button.init_confirm,
+          modal_close: content.button.modal_close
         }
       },
     }

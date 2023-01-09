@@ -1,6 +1,6 @@
 <template>
-  <form>
-    <label>Ajouter des nouveaux joueurs</label>
+  <h3 class="modal-title">Ajouter des nouveaux joueurs</h3>
+
     <div
         v-for="(newPlayer, k) in newPlayers"
         :key="k"
@@ -14,8 +14,17 @@
         <button v-show="k || ( !k && newPlayers.length > 1)" @click="removeField(k)" type="button">-</button>
       </div>
     </div>
-    <button @click="sendNewPlayers" type="button" v-html="texts.button.add_to_list"></button>
-  </form>
+    <div class="modal-footer">
+      <button
+          class="btn-modal"
+          @click="$emit('close')"
+          v-html="texts.button.modal_close"></button>
+      <button @click="sendNewPlayers"
+              class="btn-modal"
+              type="button"
+              v-html="texts.button.add_to_list"></button>
+    </div>
+
 </template>
 
 <script>
@@ -28,7 +37,8 @@ export default {
       texts: {
         "title": content.add_new_player.title,
         button: {
-          add_to_list: content.button.add_to_list
+          add_to_list: content.button.add_to_list,
+          modal_close: content.button.modal_close
         }
       },
       newPlayers: [

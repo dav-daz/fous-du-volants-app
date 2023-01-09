@@ -41,3 +41,13 @@ button {
   background: transparent;
   padding: 0;
 }
+
+.btn-modal {
+  @extend .btn-icon;
+
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: $c-modal-btn;
+  padding: 0.8rem;
+}

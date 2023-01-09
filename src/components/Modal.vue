@@ -5,20 +5,9 @@
     <div v-if="show" class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
-          <div class="modal-header">
-            <button
-                class="modal-default-button"
-                @click="$emit('close')"
-                v-html="texts.button.modal_close"
-            ></button>
-          </div>
-
           <div class="modal-body">
             <slot name="body"></slot>
-
           </div>
-
         </div>
       </div>
     </div>
@@ -70,12 +59,19 @@ export default {
     margin: 0 auto;
     padding: 20px 30px;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: $border-radius-4;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.5s ease;
   }
 
+  &-title {
+    font-size: 1.9rem;
+    margin: 0;
+  }
+
   &-header {
+    text-align: right;
+
     h3 {
       margin-top: 0;
       margin-bottom: 50px;
@@ -85,11 +81,9 @@ export default {
 
   &-footer {
     display: flex;
-    justify-content: space-between;
-  }
-
-  &-body {
-    margin: 20px 0;
+    justify-content: flex-end;
+    gap: 4rem;
+    margin-top: 4rem;
   }
 
   &-default-button {

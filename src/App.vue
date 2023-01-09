@@ -29,14 +29,14 @@
 
 
   <!-- use the modal component, pass in the prop -->
-  <modal :show="showModal" @close="showModal = false">
+  <modal :show="showModal">
     <template #body>
       <!--
       On change de composant, grâce à <component> et :is
       Comme si on écrivait : <addNewPlayers @add-new-players="addNewPlayers" /> ou <resetPlayers @reset="reset" />
       On récup aussi les $emit des composants
       -->
-      <component :is="componentInModal" @add-new-players="addNewPlayers" @reset="reset" />
+      <component :is="componentInModal" @add-new-players="addNewPlayers" @close="showModal = false" @reset="reset" />
     </template>
   </modal>
 
@@ -232,7 +232,7 @@ export default {
     gap: 3rem;
     padding: 1.6rem;
     border: 1px solid #e0e0e0;
-    border-radius: 4px;
+    border-radius: $border-radius-4;
 
     &-name {
       font-size: 1.8rem;
