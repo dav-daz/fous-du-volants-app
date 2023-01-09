@@ -14,13 +14,14 @@
     <ul>
       <li v-for="player in registeredPersons"
           :key="player.id"
-          v-bind:class="{selected: playersSelected.find(el => el.id == player.id)}"
           class="all-persons-list-item"
       >
-        <div class="all-persons-list-buttons">
-          <button @click="addPlayer(player)" class="button-add" type="button"><fa-icon icon="user-plus" size="2x" /></button>
-          <p class="all-persons-list-name">{{ player.nom }}</p>
-          <button @click="deletePlayer(player)" class="button-delete" type="button"><fa-icon icon="user-minus" size="2x" /></button>
+        <div v-bind:class="{selected: playersSelected.find(el => el.id == player.id)}" class="person-card">
+          <p class="person-card-name">{{ player.nom }}</p>
+          <div class="person-card-buttons">
+            <button @click="addPlayer(player)" class="person-card-buttons-button add btn-icon" type="button"><fa-icon icon="user-plus" size="2x" /></button>
+            <button @click="deletePlayer(player)" class="person-card-buttons-button delete btn-icon" type="button"><fa-icon icon="user-minus" size="2x" /></button>
+          </div>
         </div>
       </li>
     </ul>
@@ -215,27 +216,46 @@ export default {
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
+    margin-bottom: 6rem;
   }
 
   .all-persons-list {
-    text-align: center;
-
     &-item {
-      background-color: $c-red;
       margin-bottom: 1rem;
+    }
+  }
+
+  .person-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid grey;
+    background-color: lightgrey;
+
+    &-name {
+      font-size: 1.8rem;
       color: $c-white;
       font-weight: 700;
-      padding: 0.5rem;
-
-      &.selected {
-        background-color: $c-green;
-      }
     }
 
     &-buttons {
-      display: flex;
-      justify-content: space-between;
-      gap: 3rem;
+      &-button {
+        &.delete {
+          display: none;
+        }
+      }
+    }
+
+    &.selected {
+      .add {
+        display: none;
+      }
+
+      .delete {
+        display: inline-block;
+      }
     }
   }
 

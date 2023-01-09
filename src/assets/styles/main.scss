@@ -21,9 +21,23 @@ li {
   margin: 0;
 }
 
+p {
+  margin: 0;
+}
+
 img {
   display: block;
   max-width: 100%;
   height: auto;
   flex: none; // for ie 11
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn-icon {
+  border: none;
+  background: transparent;
+  padding: 0;
 }
