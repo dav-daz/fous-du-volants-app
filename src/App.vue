@@ -221,7 +221,7 @@ export default {
 
   .all-persons-list {
     &-item {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -230,13 +230,12 @@ export default {
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
-    padding: 1rem 1.5rem;
-    border: 1px solid grey;
-    background-color: lightgrey;
+    padding: 1.6rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
 
     &-name {
       font-size: 1.8rem;
-      color: $c-white;
       font-weight: 700;
     }
 
@@ -249,6 +248,9 @@ export default {
     }
 
     &.selected {
+      background-color: $c-green;
+      //box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+
       .add {
         display: none;
       }
