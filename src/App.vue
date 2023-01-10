@@ -7,7 +7,7 @@
   <div class="tools">
     <button class="btn-icon btn-init" @click="loadModal('resetPlayers')" type="button"><fa-icon icon="trash" /></button>
     <p>{{ texts.nbr_joueurs_select }} {{ playersSelected.length }}</p>
-    <button class="btn-add" @click="loadModal('addNewPlayers')" type="button" v-html="texts.button.add_news_players"></button>
+    <button class="btn-icon btn-add-players" @click="loadModal('addNewPlayers')" type="button"><fa-icon icon="plus" /></button>
   </div>
 
   <div class="all-persons-list">
@@ -271,6 +271,18 @@ export default {
 
     .fa-trash {
       font-size: 2rem;
+    }
+  }
+
+  .btn-add-players {
+    color: $c-white;
+    background-color: $c-modal-btn;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+
+    .fa-plus {
+      font-size: 2.5rem;
     }
   }
 }

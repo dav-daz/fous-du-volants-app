@@ -66,11 +66,10 @@ export default {
 
   &-title {
     font-size: 1.9rem;
-    margin: 0;
+    margin: 0 0 1.5rem 0;
   }
 
   &-text {
-    margin-top: 1.5rem;
     font-size: 1.4rem;
     line-height: 1.3;
   }
