@@ -5,6 +5,10 @@
   "add_new_player": {
     "title": "Ajouter des nouveaux joueurs"
   },
+  "reset_players": {
+    "title": "Initialiser ?",
+    "text": "Cela retirera tout les joueurs et effacera ceux ajoutés."
+  },
   "button": {
     "add_player": "Ajouter",
     "delete_player": "Retirer",

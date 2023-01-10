@@ -1,5 +1,7 @@
 <template>
-  <h3 class="modal-title">Initialiser ?</h3>
+  <h3 class="modal-title" v-html="texts.reset_players.title"></h3>
+
+  <p class="modal-text" v-html="texts.reset_players.text"></p>
 
   <div class="modal-footer">
     <button
@@ -22,6 +24,10 @@ export default {
   data() {
     return {
       texts: {
+        reset_players: {
+          title: content.reset_players.title,
+          text: content.reset_players.text
+        },
         button: {
           init_confirm: content.button.init_confirm,
           modal_close: content.button.modal_close

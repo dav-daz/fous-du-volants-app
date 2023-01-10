@@ -69,6 +69,12 @@ export default {
     margin: 0;
   }
 
+  &-text {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+
   &-header {
     text-align: right;
 

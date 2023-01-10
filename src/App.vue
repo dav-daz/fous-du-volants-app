@@ -5,7 +5,7 @@
   -->
 
   <div class="tools">
-    <button class="btn-init" @click="loadModal('resetPlayers')" type="button" v-html="texts.button.initialiser"></button>
+    <button class="btn-icon btn-init" @click="loadModal('resetPlayers')" type="button"><fa-icon icon="trash" /></button>
     <p>{{ texts.nbr_joueurs_select }} {{ playersSelected.length }}</p>
     <button class="btn-add" @click="loadModal('addNewPlayers')" type="button" v-html="texts.button.add_news_players"></button>
   </div>
@@ -233,6 +233,7 @@ export default {
     padding: 1.6rem;
     border: 1px solid #e0e0e0;
     border-radius: $border-radius-4;
+    transition: all ease-in-out 0.3s;
 
     &-name {
       font-size: 1.8rem;
@@ -262,8 +263,15 @@ export default {
   }
 
   .btn-init {
-    color: red;
-    border: 1px solid red;
+    color: $c-white;
+    background-color: $c-red;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+
+    .fa-trash {
+      font-size: 2rem;
+    }
   }
 }
 

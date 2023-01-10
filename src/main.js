@@ -4,8 +4,8 @@ import App from './App.vue';
 // font-awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faUserPlus, faUserMinus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faUserMinus, faXmark, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faUserPlus, faUserMinus, faXmark);
+library.add(faUserPlus, faUserMinus, faXmark, faTrash);
 
 createApp(App).component("fa-icon", FontAwesomeIcon).mount('#app');
