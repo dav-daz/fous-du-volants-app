@@ -6,7 +6,7 @@
 
   <div class="tools">
     <button class="btn-icon btn-init" @click="loadModal('resetPlayers')" type="button"><fa-icon icon="trash" /></button>
-    <p>{{ texts.nbr_joueurs_select }} {{ playersSelected.length }}</p>
+    <p class="players-title">{{ texts.nbr_joueurs_select }} <span v-if="playersSelected.length" class="badge">{{ playersSelected.length }}</span></p>
     <button class="btn-icon btn-add-players" @click="loadModal('addNewPlayers')" type="button"><fa-icon icon="plus" /></button>
   </div>
 
@@ -211,6 +211,27 @@ export default {
 
 <style lang="scss">
 #app {
+  .players-title {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 700;
+
+    .badge {
+      position: absolute;
+      top: -0.8rem;
+      right: -2.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      height: 2rem;
+      width: 2rem;
+      background-color: $c-modal-btn;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: $c-white;
+      border-radius: 50%;
+    }
+  }
   .tools {
     display: flex;
     justify-content: space-between;
