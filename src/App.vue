@@ -55,6 +55,10 @@ export default {
         localStorage.removeItem('newPlayers');
       }
     }
+
+    if (this.playersSelected.length) {
+      this.nbrSelectedPlayers = this.playersSelected.length;
+    }
   },
   methods:{
     saveInLocal() {
