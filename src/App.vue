@@ -4,21 +4,32 @@
   <HelloWorld msg="Welcome to Your Vue.js App"/>
   -->
 
-  <p class="players-title">{{ texts.nbr_joueurs_select }} <span class="badge" v-if="nbrSelectedPlayers">{{ nbrSelectedPlayers }}</span></p>
 
+  <!--
   <players @total-selected-players="totalSelectedPlayers" ></players>
+  <matchsHome></matchsHome>
+  -->
+<div class="tabs">
+  <button class="btn btn-icon players-title" @click="currentTab = 'players'">{{ texts.nbr_joueurs_select }} <span class="badge" v-if="nbrSelectedPlayers">{{ nbrSelectedPlayers }}</span></button>
+  <button class="btn btn-icon" @click="currentTab = 'matchsHome'">Matchs</button>
+</div>
 
+<div class="main-content">
+  <component :is="currentTab" @total-selected-players="totalSelectedPlayers"></component>
+</div>
 
 </template>
 
 <script>
 import content from '@/data/content.json';
 import players from "@/components/players";
+import matchsHome from "@/components/matchsHome";
 
 export default {
   name: 'App',
   components: {
-    players
+    players,
+    matchsHome
   },
   data() {
     return {
@@ -28,7 +39,8 @@ export default {
       playersSelected: [],
       registeredPersons : content.registeredPersons,
       newPlayers: [],
-      nbrSelectedPlayers:''
+      nbrSelectedPlayers: '',
+      currentTab: 'players'
     }
   },
   mounted() {
@@ -81,11 +93,25 @@ export default {
 
 <style lang="scss">
 #app {
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    border-bottom: 1px solid $c-grey;
+
+    .btn {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
+
+  .main-content {
+    margin-top: 3rem;
+  }
+
   .players-title {
     position: relative;
     display: inline-block;
-    font-size: 2rem;
-    font-weight: 700;
 
     .badge {
       position: absolute;
