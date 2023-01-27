@@ -123,8 +123,8 @@ export default {
 
     .badge {
       position: absolute;
-      top: 1rem;
-      right: 0rem;
+      top: -0.3rem;
+      right: 0;
       font-size: 1.2rem;
       font-weight: 700;
       height: 2rem;
