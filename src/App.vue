@@ -10,8 +10,8 @@
   <matchsHome></matchsHome>
   -->
 <div class="tabs">
-  <button class="btn btn-icon players-title" @click="currentTab = 'players'">{{ texts.nbr_joueurs_select }} <span class="badge" v-if="nbrSelectedPlayers">{{ nbrSelectedPlayers }}</span></button>
-  <button class="btn btn-icon" @click="currentTab = 'matchsHome'">Matchs</button>
+  <button class="btn btn-icon players-title" :class="{ 'selected' : currentTab === 'players'}" @click="tabSelect('players')">{{ texts.nbr_joueurs_select }} <span class="badge" v-if="nbrSelectedPlayers">{{ nbrSelectedPlayers }}</span></button>
+  <button class="btn btn-icon" :class="{ 'selected' : currentTab === 'matchsHome'}" @click="tabSelect('matchsHome')">Matchs</button>
 </div>
 
 <div class="main-content">
@@ -73,6 +73,9 @@ export default {
     }
   },
   methods:{
+    tabSelect(tabName) {
+      this.currentTab = tabName;
+    },
     saveInLocal() {
       const parsedSelected = JSON.stringify(this.playersSelected);
       localStorage.setItem('playersSelected', parsedSelected);
@@ -96,17 +99,22 @@ export default {
   .tabs {
     display: flex;
     justify-content: space-between;
-    padding: 2rem;
     border-bottom: 1px solid $c-grey;
 
     .btn {
       font-size: 2rem;
       font-weight: 700;
+      padding: 1rem 2rem;
+
+      &.selected {
+        border-bottom: 2px solid $c-modal-btn;
+      }
     }
   }
 
   .main-content {
     margin-top: 3rem;
+    padding: 0 1rem;
   }
 
   .players-title {
@@ -115,8 +123,8 @@ export default {
 
     .badge {
       position: absolute;
-      top: -0.8rem;
-      right: -2.5rem;
+      top: 1rem;
+      right: 0rem;
       font-size: 1.2rem;
       font-weight: 700;
       height: 2rem;

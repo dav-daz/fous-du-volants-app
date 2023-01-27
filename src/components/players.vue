@@ -214,6 +214,7 @@ export default {
   .all-persons-list {
     &-item {
       margin-bottom: 1.5rem;
+      list-style: none;
     }
   }
 
