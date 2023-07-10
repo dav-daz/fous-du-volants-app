@@ -97,9 +97,13 @@ export default {
 <style lang="scss">
 #app {
   .tabs {
+    position: fixed;
+    top: 0;
     display: flex;
+    padding-top: 1rem;
     justify-content: space-between;
     border-bottom: 1px solid $c-grey;
+    background-color: $c-white;
 
     .btn {
       font-size: 2rem;
@@ -113,7 +117,7 @@ export default {
   }
 
   .main-content {
-    margin-top: 3rem;
+    margin-top: 7rem;
     padding: 0 1rem;
   }
 

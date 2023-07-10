@@ -55,9 +55,10 @@ export default {
   }
 
   &-container {
-    width: 300px;
+    width: 90%;
+    max-width: 300px;
     margin: 0 auto;
-    padding: 20px 30px;
+    padding: 2rem 1rem;
     background-color: #fff;
     border-radius: $border-radius-4;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
