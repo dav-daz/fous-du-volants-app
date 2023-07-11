@@ -1,23 +1,41 @@
 <template>
   <div class="tools">
-    <button class="btn-icon btn-init" @click="loadModal('resetPlayers')" type="button"><fa-icon icon="trash" /></button>
+    <button class="btn-icon btn-init" 
+            @click="loadModal('resetPlayers')" 
+            type="button">
+      <fa-icon icon="trash" />
+    </button>
 
-    <button class="btn-icon btn-add-players" @click="loadModal('addNewPlayers')" type="button"><fa-icon icon="plus" /></button>
+    <button class="btn-icon btn-add-players" 
+            @click="loadModal('addNewPlayers')" 
+            type="button">
+      <fa-icon icon="plus" />
+    </button>
   </div>
 
   <div class="all-persons-list">
     <ul>
       <li v-for="player in registeredPersons"
           :key="player.id"
-          class="all-persons-list-item"
-      >
+          class="all-persons-list-item">
+
         <div v-bind:class="{selected: playersSelected.find(el => el.id == player.id)}" class="person-card">
           <p class="person-card-name">{{ player.nom }}</p>
           <div class="person-card-buttons">
-            <button @click="addPlayer(player)" class="person-card-buttons-button add btn-icon" type="button"><fa-icon icon="user-plus" size="2x" /></button>
-            <button @click="deletePlayer(player)" class="person-card-buttons-button delete btn-icon" type="button"><fa-icon icon="user-minus" size="2x" /></button>
+            <button @click="addPlayer(player)" 
+                    class="person-card-buttons-button add btn-icon" 
+                    type="button">
+              <fa-icon icon="user-plus" size="2x" />
+            </button>
+
+            <button @click="deletePlayer(player)" 
+                    class="person-card-buttons-button delete btn-icon" 
+                    type="button">
+              <fa-icon icon="user-minus" size="2x" />
+            </button>
           </div>
         </div>
+
       </li>
     </ul>
   </div>
@@ -30,8 +48,13 @@
       On change de composant, grâce à <component> et :is
       Comme si on écrivait : <addNewPlayers @add-new-players="addNewPlayers" /> ou <resetPlayers @reset="reset" />
       On récup aussi les $emit des composants
+
+      @add-new-players | @reset : $emit from 'resetPlayers.vue'
       -->
-      <component :is="componentInModal" @add-new-players="addNewPlayers" @close="showModal = false" @reset="reset" />
+      <component :is="componentInModal" 
+                  @add-new-players="addNewPlayers" 
+                  @close="showModal = false" 
+                  @reset="reset" />
     </template>
   </modal>
 </template>
@@ -44,6 +67,7 @@ import resetPlayers from "@/components/resetPlayers";
 
 export default {
   name: "players.vue",
+  props: ['playersSelected','registeredPersons'],
   components: {
     Modal,
     addNewPlayers,
@@ -62,34 +86,9 @@ export default {
       },
       showModal: false,
       componentInModal: '',
-      playersSelected: [],
-      registeredPersons : content.registeredPersons,
+      //playersSelected: [],
+      //registeredPersons : content.registeredPersons,
       newPlayers: [],
-    }
-  },
-  mounted() {
-    if (localStorage.getItem('playersSelected')) {
-      try {
-        this.playersSelected = JSON.parse(localStorage.getItem('playersSelected'));
-      } catch(e) {
-        localStorage.removeItem('playersSelected');
-      }
-    }
-
-    if (localStorage.getItem('registeredPersons')) {
-      try {
-        this.registeredPersons = JSON.parse(localStorage.getItem('registeredPersons'));
-      } catch(e) {
-        localStorage.removeItem('registeredPersons');
-      }
-    }
-
-    if (localStorage.getItem('newPlayers')) {
-      try {
-        this.newPlayers = JSON.parse(localStorage.getItem('newPlayers'));
-      } catch(e) {
-        localStorage.removeItem('newPlayers');
-      }
     }
   },
   methods:{
@@ -158,15 +157,13 @@ export default {
 
     saveInLocal() {
       const parsedSelected = JSON.stringify(this.playersSelected);
-      localStorage.setItem('playersSelected', parsedSelected);
+      localStorage.setItem('localPlayersSelected', parsedSelected);
 
       const parsedRegistered = JSON.stringify(this.registeredPersons);
-      localStorage.setItem('registeredPersons', parsedRegistered);
+      localStorage.setItem('localRegisteredPersons', parsedRegistered);
 
       const parsedNewPlayers = JSON.stringify(this.newPlayers);
-      localStorage.setItem('newPlayers', parsedNewPlayers);
-
-      this.$emit('totalSelectedPlayers', this.playersSelected.length);
+      localStorage.setItem('localNewPlayers', parsedNewPlayers);
     },
 
     deleteNewPlayers() {
@@ -187,15 +184,14 @@ export default {
     },
 
     reset() {
-      this.playersSelected = [];
+      this.$emit('reset-player-selected');
       this.deleteNewPlayers();
 
-      localStorage.removeItem('playersSelected');
-      localStorage.removeItem('registeredPersons');
-      localStorage.removeItem('newPlayers');
+      localStorage.removeItem('localPlayersSelected');
+      localStorage.removeItem('localRegisteredPersons');
+      localStorage.removeItem('localNewPlayers');
 
       this.showModal = false;
-      this.$emit('totalSelectedPlayers', this.playersSelected.length);
     }
   }
 }

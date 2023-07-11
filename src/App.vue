@@ -4,18 +4,34 @@
   <HelloWorld msg="Welcome to Your Vue.js App"/>
   -->
 
-
   <!--
   <players @total-selected-players="totalSelectedPlayers" ></players>
   <matchsHome></matchsHome>
   -->
 <div class="tabs">
-  <button class="btn btn-icon players-title" :class="{ 'selected' : currentTab === 'players'}" @click="tabSelect('players')">{{ texts.nbr_joueurs_select }} <span class="badge" v-if="nbrSelectedPlayers">{{ nbrSelectedPlayers }}</span></button>
-  <button class="btn btn-icon" :class="{ 'selected' : currentTab === 'matchsHome'}" @click="tabSelect('matchsHome')">Matchs</button>
+  <button class="btn btn-icon players-title" 
+          :class="{ 'selected' : currentTab === 'players'}" 
+          @click="tabSelect('players')">
+    {{ texts.nbr_joueurs_select }} 
+    <span class="badge" v-if="playersSelected.length">{{ playersSelected.length }}</span>
+  </button>
+
+  <button class="btn btn-icon" 
+          :class="{ 'selected' : currentTab === 'matchsHome'}" 
+          @click="tabSelect('matchsHome')">
+    Matchs
+  </button>
 </div>
 
 <div class="main-content">
-  <component :is="currentTab" @total-selected-players="totalSelectedPlayers"></component>
+  <!--
+  :playersSelected | :registeredPersons : props for get array to 'players.vue'
+  @reset-player-selected : $emit from 'players.vue' component
+  -->
+  <component :is="currentTab" 
+              :playersSelected="playersSelected"
+              :registeredPersons="registeredPersons"
+              @reset-player-selected="this.playersSelected = []"/>
 </div>
 
 </template>
@@ -39,58 +55,39 @@ export default {
       playersSelected: [],
       registeredPersons : content.registeredPersons,
       newPlayers: [],
-      nbrSelectedPlayers: '',
       currentTab: 'players'
     }
   },
   mounted() {
-    if (localStorage.getItem('playersSelected')) {
+    if (localStorage.getItem('localPlayersSelected')) {
       try {
-        this.playersSelected = JSON.parse(localStorage.getItem('playersSelected'));
+        this.playersSelected = JSON.parse(localStorage.getItem('localPlayersSelected'));
       } catch(e) {
-        localStorage.removeItem('playersSelected');
+        localStorage.removeItem('localPlayersSelected');
       }
     }
 
-    if (localStorage.getItem('registeredPersons')) {
+    if (localStorage.getItem('localRegisteredPersons')) {
       try {
-        this.registeredPersons = JSON.parse(localStorage.getItem('registeredPersons'));
+        this.registeredPersons = JSON.parse(localStorage.getItem('localRegisteredPersons'));
       } catch(e) {
-        localStorage.removeItem('registeredPersons');
+        localStorage.removeItem('localRegisteredPersons');
       }
     }
 
-    if (localStorage.getItem('newPlayers')) {
+    if (localStorage.getItem('localNewPlayers')) {
       try {
-        this.newPlayers = JSON.parse(localStorage.getItem('newPlayers'));
+        this.newPlayers = JSON.parse(localStorage.getItem('localNewPlayers'));
       } catch(e) {
-        localStorage.removeItem('newPlayers');
+        localStorage.removeItem('localNewPlayers');
       }
-    }
-
-    if (this.playersSelected.length) {
-      this.nbrSelectedPlayers = this.playersSelected.length;
     }
   },
   methods:{
     tabSelect(tabName) {
       this.currentTab = tabName;
-    },
-    saveInLocal() {
-      const parsedSelected = JSON.stringify(this.playersSelected);
-      localStorage.setItem('playersSelected', parsedSelected);
-
-      const parsedRegistered = JSON.stringify(this.registeredPersons);
-      localStorage.setItem('registeredPersons', parsedRegistered);
-
-      const parsedNewPlayers = JSON.stringify(this.newPlayers);
-      localStorage.setItem('newPlayers', parsedNewPlayers);
-    },
-    totalSelectedPlayers (s) {
-      this.nbrSelectedPlayers = s;
     }
   }
-
 }
 </script>
 
