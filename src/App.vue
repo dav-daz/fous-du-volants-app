@@ -31,7 +31,8 @@
   <component :is="currentTab" 
               :playersSelected="playersSelected"
               :registeredPersons="registeredPersons"
-              @reset-player-selected="this.playersSelected = []"/>
+              @reset-player-selected="this.playersSelected = []"
+  />
 </div>
 
 </template>
