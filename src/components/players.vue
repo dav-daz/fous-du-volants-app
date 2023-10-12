@@ -220,7 +220,7 @@ export default {
     justify-content: space-between;
     gap: 3rem;
     padding: 1.6rem;
-    border: 1px solid #e0e0e0;
+    background-color: $c-blue-light;
     border-radius: $border-radius-4;
     transition: all ease-in-out 0.3s;
 

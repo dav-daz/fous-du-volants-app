@@ -1,40 +1,30 @@
 <template>
-  <!--
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  -->
+  <div class="tabs">
+    <button class="btn btn-icon players-title" 
+            :class="{ 'selected' : currentTab === 'players'}" 
+            @click="tabSelect('players')">
+      {{ texts.nbr_joueurs_select }} 
+      <span class="badge" v-if="playersSelected.length">{{ playersSelected.length }}</span>
+    </button>
 
-  <!--
-  <players @total-selected-players="totalSelectedPlayers" ></players>
-  <matchsHome></matchsHome>
-  -->
-<div class="tabs">
-  <button class="btn btn-icon players-title" 
-          :class="{ 'selected' : currentTab === 'players'}" 
-          @click="tabSelect('players')">
-    {{ texts.nbr_joueurs_select }} 
-    <span class="badge" v-if="playersSelected.length">{{ playersSelected.length }}</span>
-  </button>
+    <button class="btn btn-icon" 
+            :class="{ 'selected' : currentTab === 'matchsHome'}" 
+            @click="tabSelect('matchsHome')">
+      Matchs
+    </button>
+  </div>
 
-  <button class="btn btn-icon" 
-          :class="{ 'selected' : currentTab === 'matchsHome'}" 
-          @click="tabSelect('matchsHome')">
-    Matchs
-  </button>
-</div>
-
-<div class="main-content">
-  <!--
-  :playersSelected | :registeredPersons : props for get array to 'players.vue'
-  @reset-player-selected : $emit from 'players.vue' component
-  -->
-  <component :is="currentTab" 
-              :playersSelected="playersSelected"
-              :registeredPersons="registeredPersons"
-              @reset-player-selected="this.playersSelected = []"
-  />
-</div>
-
+  <div class="main-content">
+    <!--
+    :playersSelected | :registeredPersons : props for get array to 'players.vue'
+    @reset-player-selected : $emit from 'players.vue' component
+    -->
+    <component :is="currentTab" 
+                :playersSelected="playersSelected"
+                :registeredPersons="registeredPersons"
+                @reset-player-selected="this.playersSelected = []"
+    />
+  </div>
 </template>
 
 <script>
@@ -99,9 +89,10 @@ export default {
     top: 0;
     display: flex;
     padding-top: 1rem;
-    justify-content: space-between;
+    justify-content: left;
     border-bottom: 1px solid $c-grey;
     background-color: $c-white;
+    width: 100%;
 
     .btn {
       font-size: 2rem;
@@ -115,7 +106,7 @@ export default {
   }
 
   .main-content {
-    margin-top: 7rem;
+    margin-top: 9rem;
     padding: 0 1rem;
   }
 
