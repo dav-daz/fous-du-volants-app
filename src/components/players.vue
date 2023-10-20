@@ -15,7 +15,7 @@
 
   <div class="all-persons-list">
     <ul>
-      <li v-for="player in registeredPersons"
+      <li v-for="player in this.registeredPersons"
           :key="player.id"
           class="all-persons-list-item">
 
@@ -67,7 +67,6 @@ import resetPlayers from "@/components/resetPlayers";
 
 export default {
   name: "players.vue",
-  props: ['playersSelected','registeredPersons'],
   components: {
     Modal,
     addNewPlayers,
@@ -86,8 +85,8 @@ export default {
       },
       showModal: false,
       componentInModal: '',
-      //playersSelected: [],
-      //registeredPersons : content.registeredPersons,
+      registeredPersons : JSON.parse(localStorage.getItem('localRegisteredPersons')),
+      playersSelected: JSON.parse(localStorage.getItem('localPlayersSelected')),
       newPlayers: [],
     }
   },
