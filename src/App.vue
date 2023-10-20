@@ -1,86 +1,43 @@
+<script setup>
+  import players from "@/components/players";
+  import matchsHome from "@/components/matchsHome";
+
+  import { usePlayersStore } from "@/store/players";
+  const playersStore = usePlayersStore();
+</script>
+
 <template>
   <div class="tabs">
     <button class="btn btn-icon players-title" 
-            :class="{ 'selected' : currentTab === 'players'}" 
-            @click="tabSelect('players')">
-      {{ texts.nbr_joueurs_select }} 
-      <span class="badge" v-if="playersSelected.length">{{ playersSelected.length }}</span>
+            :class="{ 'selected' : playersStore.currentTab === 'players'}" 
+            @click="playersStore.tabSelect('players')">
+      {{ playersStore.texts.nbr_joueurs_select }} 
+      <span class="badge">{{ totalSelected }}</span>
     </button>
 
     <button class="btn btn-icon" 
-            :class="{ 'selected' : currentTab === 'matchsHome'}" 
-            @click="tabSelect('matchsHome')">
+            :class="{ 'selected' : playersStore.currentTab === 'matchsHome'}"
+            @click="playersStore.tabSelect('matchsHome')">
       Matchs
     </button>
   </div>
 
   <div class="main-content">
+    <players v-if="playersStore.currentTab === 'players'" />
+    <matchsHome v-if="playersStore.currentTab === 'matchsHome'" />
+
     <!--
     :playersSelected | :registeredPersons : props for get array to 'players.vue'
     @reset-player-selected : $emit from 'players.vue' component
     -->
-    <component :is="currentTab" 
-                :playersSelected="playersSelected"
-                :registeredPersons="registeredPersons"
+
+    <!--
+    <component :is="tab" 
                 @reset-player-selected="this.playersSelected = []"
     />
+    -->
   </div>
 </template>
-
-<script>
-import content from '@/data/content.json';
-import players from "@/components/players";
-import matchsHome from "@/components/matchsHome";
-
-export default {
-  name: 'App',
-  components: {
-    players,
-    matchsHome
-  },
-  data() {
-    return {
-      texts: {
-        nbr_joueurs_select: content.home.nbr_joueurs_select,
-      },
-      playersSelected: [],
-      registeredPersons : content.registeredPersons,
-      newPlayers: [],
-      currentTab: 'players'
-    }
-  },
-  mounted() {
-    if (localStorage.getItem('localPlayersSelected')) {
-      try {
-        this.playersSelected = JSON.parse(localStorage.getItem('localPlayersSelected'));
-      } catch(e) {
-        localStorage.removeItem('localPlayersSelected');
-      }
-    }
-
-    if (localStorage.getItem('localRegisteredPersons')) {
-      try {
-        this.registeredPersons = JSON.parse(localStorage.getItem('localRegisteredPersons'));
-      } catch(e) {
-        localStorage.removeItem('localRegisteredPersons');
-      }
-    }
-
-    if (localStorage.getItem('localNewPlayers')) {
-      try {
-        this.newPlayers = JSON.parse(localStorage.getItem('localNewPlayers'));
-      } catch(e) {
-        localStorage.removeItem('localNewPlayers');
-      }
-    }
-  },
-  methods:{
-    tabSelect(tabName) {
-      this.currentTab = tabName;
-    }
-  }
-}
-</script>
 
 <style lang="scss">
 #app {
