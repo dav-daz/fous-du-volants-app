@@ -1,6 +1,14 @@
 <script setup>
+  //On importe storeToRefs pour écouter les changements
+  import { storeToRefs } from "pinia";
+
   import { useTabsStore } from "@/store/tabs";
   const tabsStore = useTabsStore();
+
+  import { usePlayersStore } from "@/store/players";
+  
+  //Sert à détecter les changements du store playersStore défini au-dessus
+  const { playersSelected } = storeToRefs(usePlayersStore());
 </script>
 
 <template>
@@ -9,7 +17,7 @@
             :class="{ 'selected' : tabsStore.currentTab === 'players'}" 
             @click="tabsStore.tabSelect('players')">
       {{ tabsStore.texts.nbr_joueurs_select }} 
-      <span class="badge">{{ totalSelected }}</span>
+      <span v-if="playersSelected.length" class="badge">{{ playersSelected.length }}</span>
     </button>
 
     <button class="btn btn-icon" 

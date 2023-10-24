@@ -14,6 +14,28 @@ const app = createApp(App);
 
 //createApp(App).component("fa-icon", FontAwesomeIcon).mount('#app');
 
+pinia.use((context) => {
+
+  const storeId = context.store.$id;
+
+  const serilizer = {
+    serialize: JSON.stringify,
+    deserialize: JSON.parse
+  }
+
+  //Sync du store avec le localstorage
+  const fromStorage = serilizer.deserialize(window.localStorage.getItem(storeId));
+
+  if (fromStorage) {
+    context.store.$patch(fromStorage);
+  }
+
+  //Ecoute pour les changements et maj du localstorage
+  context.store.$subscribe((mutation, state) => {
+    window.localStorage.setItem(storeId, serilizer.serialize(state));
+  })
+})
+
 app.component("fa-icon", FontAwesomeIcon);
 app.use(pinia);
 app.mount('#app');

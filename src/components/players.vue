@@ -1,22 +1,27 @@
+<script setup>
+  import { usePlayersStore } from "@/store/players";
+  const playersStore = usePlayersStore();
+</script>
+
 <template>
   <tools />
 
   <div class="all-persons-list">
     <ul>
-      <li v-for="player in this.registeredPersons"
+      <li v-for="player in playersStore.registeredPersons"
           :key="player.id"
           class="all-persons-list-item">
 
-        <div v-bind:class="{selected: playersSelected.find(el => el.id == player.id)}" class="person-card">
+        <div v-bind:class="{selected: playersStore.playersSelected.find(el => el.id == player.id)}" class="person-card">
           <p class="person-card-name">{{ player.nom }}</p>
           <div class="person-card-buttons">
-            <button @click="addPlayer(player)" 
+            <button @click="playersStore.addPlayer(player)" 
                     class="person-card-buttons-button add btn-icon" 
                     type="button">
               <fa-icon icon="user-plus" size="2x" />
             </button>
 
-            <button @click="deletePlayer(player)" 
+            <button @click="playersStore.deletePlayer(player)" 
                     class="person-card-buttons-button delete btn-icon" 
                     type="button">
               <fa-icon icon="user-minus" size="2x" />
@@ -66,32 +71,6 @@ export default {
     }
   },
   methods:{
-    addPlayer (player) {
-      // on regarde si le joueur est déjà dans le tableau
-      let found = this.playersSelected.find(el => el.id == player.id);
-
-      if(!found) {
-        this.playersSelected.push({
-          id: player.id,
-          nom: player.nom
-        });
-      }
-
-      this.saveInLocal();
-    },
-
-    deletePlayer (player) {
-      // retrouve l'index de mon object "player"
-      const indexPlayer = this.playersSelected.map(i => i.id).indexOf(player.id);
-
-      if(indexPlayer > -1) {
-        // si on retrouve, on supprime du tableau
-        this.playersSelected.splice(indexPlayer, 1);
-      }
-
-      this.saveInLocal();
-    },
-
     addNewPlayers(players) {
       for (var i = 0, length = players.length; i < length; i++) {
         let playerName = players[i].nom;
