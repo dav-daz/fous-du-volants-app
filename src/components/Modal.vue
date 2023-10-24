@@ -1,8 +1,19 @@
+<script setup>
+  import { useToolsStore } from "@/store/tools";
+  
+  //On importe storeToRefs pour écouter les changements
+  import { storeToRefs } from "pinia";
+
+  const toolsStore = useToolsStore();
+
+  //Sert à détecter les changements du store toolsStore défini au-dessus
+  const { showModal } = storeToRefs(toolsStore);
+</script>
 
 <template>
   <Teleport to="body">
   <Transition name="modal">
-    <div v-if="show" class="modal-mask">
+    <div v-if="toolsStore.showModal" class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-body">
@@ -14,26 +25,6 @@
   </Transition>
 </Teleport>
 </template>
-
-
-<script>
-import content from './../data/content.json';
-
-export default {
-  props: {
-    show: Boolean
-  },
-  data() {
-    return {
-      texts: {
-        button: {
-          modal_close: content.button.modal_close
-        }
-      },
-    }
-  }
-}
-</script>
 
 <style lang="scss">
 .modal {

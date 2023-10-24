@@ -1,3 +1,13 @@
+<script setup>
+  import { useToolsStore } from "@/store/tools";
+  const toolsStore = useToolsStore();
+  const texts = toolsStore.texts;
+
+  function closeModal() {
+    toolsStore.showModal = false;
+  }
+</script>
+
 <template>
   <h3 class="modal-title">Ajouter des nouveaux joueurs</h3>
 
@@ -16,30 +26,24 @@
     <div class="modal-footer">
       <button
           class="btn-modal"
-          @click="$emit('close')"
-          v-html="texts.button.modal_close"></button>
+          @click="closeModal"
+          v-html="texts.button.modal_close">
+      </button>
+      
       <button @click="sendNewPlayers"
               class="btn-modal"
               type="button"
-              v-html="texts.button.add_to_list"></button>
+              v-html="texts.button.add_to_list">
+      </button>
     </div>
 
 </template>
 
 <script>
-import content from './../data/content.json';
-
 export default {
   name: "addNewPlayers.vue",
   data() {
     return {
-      texts: {
-        "title": content.add_new_player.title,
-        button: {
-          add_to_list: content.button.add_to_list,
-          modal_close: content.button.modal_close
-        }
-      },
       newPlayers: [
         { nom :'' }
       ],

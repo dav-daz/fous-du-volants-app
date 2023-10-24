@@ -1,17 +1,5 @@
 <template>
-  <div class="tools">
-    <button class="btn-icon btn-init" 
-            @click="loadModal('resetPlayers')" 
-            type="button">
-      <fa-icon icon="trash" />
-    </button>
-
-    <button class="btn-icon btn-add-players" 
-            @click="loadModal('addNewPlayers')" 
-            type="button">
-      <fa-icon icon="plus" />
-    </button>
-  </div>
+  <tools />
 
   <div class="all-persons-list">
     <ul>
@@ -42,8 +30,9 @@
 
 
   <!-- use the modal component, pass in the prop -->
-  <modal :show="showModal">
+  <!--  <modal :show="showModal">
     <template #body>
+    -->
       <!--
       On change de composant, grâce à <component> et :is
       Comme si on écrivait : <addNewPlayers @add-new-players="addNewPlayers" /> ou <resetPlayers @reset="reset" />
@@ -51,55 +40,32 @@
 
       @add-new-players | @reset : $emit from 'resetPlayers.vue'
       -->
+      <!--
       <component :is="componentInModal" 
                   @add-new-players="addNewPlayers" 
                   @close="showModal = false" 
                   @reset="reset" />
     </template>
   </modal>
+  -->
 </template>
 
 <script>
-import content from "@/data/content.json";
-import Modal from '@/components/Modal.vue';
-import addNewPlayers  from '@/components/addNewPlayers';
-import resetPlayers from "@/components/resetPlayers";
+import tools from "@/components/tools";
 
 export default {
   name: "players.vue",
   components: {
-    Modal,
-    addNewPlayers,
-    resetPlayers,
+    tools
   },
   data() {
     return {
-      texts: {
-        nbr_joueurs_select: content.home.nbr_joueurs_select,
-        button: {
-          add_player: content.button.add_player,
-          delete_player: content.button.delete_player,
-          add_news_players: content.button.add_news_players,
-          initialiser: content.button.initialiser
-        }
-      },
-      showModal: false,
-      componentInModal: '',
       registeredPersons : JSON.parse(localStorage.getItem('localRegisteredPersons')),
       playersSelected: JSON.parse(localStorage.getItem('localPlayersSelected')),
       newPlayers: [],
     }
   },
   methods:{
-    displayModal () {
-      this.showModal = true;
-    },
-
-    loadModal (componentToLoad) {
-      this.componentInModal = componentToLoad;
-      this.displayModal();
-    },
-
     addPlayer (player) {
       // on regarde si le joueur est déjà dans le tableau
       let found = this.playersSelected.find(el => el.id == player.id);
