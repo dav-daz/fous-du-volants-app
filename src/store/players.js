@@ -1,11 +1,16 @@
 import { defineStore } from 'pinia';
+
+import { useToolsStore } from "@/store/tools";
+
 import content from '@/data/content.json';
 
 export const usePlayersStore = defineStore('players', {
     state: () => ({
       registeredPersons: content.registeredPersons,
       playersSelected: [],
-      newPlayers: [],
+      newPlayers: [
+        { nom :'' }
+      ]
     }),
     getters: {
 
@@ -32,6 +37,8 @@ export const usePlayersStore = defineStore('players', {
         }
       },
       addNewPlayers(players) {
+        const toolsStore = useToolsStore();
+
         for (var i = 0, length = players.length; i < length; i++) {
           let playerName = players[i].nom;
   
@@ -54,7 +61,7 @@ export const usePlayersStore = defineStore('players', {
             });
           }
   
-          this.showModal = false;
+          toolsStore.showModal = false;
         }
       },
       deleteNewPlayers() {
@@ -71,16 +78,17 @@ export const usePlayersStore = defineStore('players', {
           }
         }
   
-        this.newPlayers = [];
+        this.newPlayers = [
+          { nom :'' }
+        ];
       },
       reset() {
+        const toolsStore = useToolsStore();
+
         this.deleteNewPlayers();
+        this.playersSelected = [];
   
-        localStorage.removeItem('playersSelected');
-        localStorage.removeItem('registeredPersons');
-        localStorage.removeItem('newPlayers');
-  
-        this.showModal = false;
+        toolsStore.showModal = false;
       }
     },
 })

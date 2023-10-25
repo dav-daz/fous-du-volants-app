@@ -1,6 +1,10 @@
 <script setup>
   import { useToolsStore } from "@/store/tools";
   const toolsStore = useToolsStore();
+
+  import { usePlayersStore } from "@/store/players";
+  const playersStore = usePlayersStore();
+  
   const texts = toolsStore.texts;
 
   function closeModal() {
@@ -22,7 +26,7 @@
     
     <button
         class="btn-modal"
-        @click="$emit('reset')"
+        @click="playersStore.reset()"
         v-html="texts.button.init_confirm">
     </button>
   </div>

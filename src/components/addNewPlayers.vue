@@ -1,10 +1,30 @@
 <script setup>
   import { useToolsStore } from "@/store/tools";
   const toolsStore = useToolsStore();
+
+  import { usePlayersStore } from "@/store/players";
+  const playersStore = usePlayersStore();
+
   const texts = toolsStore.texts;
 
   function closeModal() {
     toolsStore.showModal = false;
+  }
+
+  function addField(player) {
+    playersStore.newPlayers.push({
+      nom: player.nom
+    });
+  }
+
+  function removeField(index) {
+    playersStore.newPlayers.splice(index, 1);
+  }
+    
+  function sendNewPlayers() {
+    //this.$emit('addNewPlayers', this.newPlayers);
+
+    playersStore.newPlayers = [{ nom :'' }];
   }
 </script>
 
@@ -12,17 +32,26 @@
   <h3 class="modal-title">Ajouter des nouveaux joueurs</h3>
 
     <div
-        v-for="(newPlayer, k) in newPlayers"
+        v-for="(newPlayer, k) in playersStore.newPlayers"
         :key="k"
         class="add-player-input"
     >
       <input v-model="newPlayer.nom" type="text" placeholder="Nom du joueur"/>
       <!-- Remove botton -->
-      <button v-show="k || ( !k && newPlayers.length > 1)" @click="removeField(k)" type="button" class="btn-icon btn-remove"><fa-icon icon="square-minus" /></button>
+      <button v-show="k || ( !k && playersStore.newPlayers.length > 1)" 
+              @click="removeField(k)" 
+              type="button" 
+              class="btn-icon btn-remove"><fa-icon icon="square-minus" />
+      </button>
 
       <!-- Add button -->
-      <button @click="addField(newPlayer.nom)" v-show="(k == newPlayers.length-1)&&(newPlayer.nom != '')" type="button" class="btn-icon btn-add"><fa-icon icon="square-plus" /></button>
+      <button v-show="(k == playersStore.newPlayers.length-1)&&(newPlayer.nom != '')" 
+              @click="addField(newPlayer.nom)"
+              type="button" 
+              class="btn-icon btn-add"><fa-icon icon="square-plus" />
+      </button>
     </div>
+
     <div class="modal-footer">
       <button
           class="btn-modal"
@@ -30,42 +59,13 @@
           v-html="texts.button.modal_close">
       </button>
       
-      <button @click="sendNewPlayers"
+      <button @click="playersStore.addNewPlayers(playersStore.newPlayers)"
               class="btn-modal"
               type="button"
               v-html="texts.button.add_to_list">
       </button>
     </div>
-
 </template>
-
-<script>
-export default {
-  name: "addNewPlayers.vue",
-  data() {
-    return {
-      newPlayers: [
-        { nom :'' }
-      ],
-    }
-  },
-  methods: {
-    addField(player) {
-      this.newPlayers.push({
-        nom: player.nom
-      });
-    },
-    removeField(index) {
-      this.newPlayers.splice(index, 1);
-    },
-    sendNewPlayers() {
-      this.$emit('addNewPlayers', this.newPlayers);
-
-      this.newPlayers = [{ nom :'' }];
-    }
-  }
-}
-</script>
 
 <style lang="scss">
   .add-player-input {
