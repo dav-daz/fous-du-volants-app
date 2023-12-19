@@ -20,17 +20,6 @@
   <div class="main-content">
     <players v-if="currentTab === 'players'" />
     <matchsHome v-if="currentTab === 'matchsHome'" />
-
-    <!--
-    :playersSelected | :registeredPersons : props for get array to 'players.vue'
-    @reset-player-selected : $emit from 'players.vue' component
-    -->
-
-    <!--
-    <component :is="tab" 
-                @reset-player-selected="this.playersSelected = []"
-    />
-    -->
   </div>
 </template>
 

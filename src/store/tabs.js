@@ -8,9 +8,6 @@ export const useTabsStore = defineStore('tabs', {
           },
         currentTab: 'players'
     }),
-    getters: {
-
-    },
     actions: {
         tabSelect(tabName) {
             this.currentTab = tabName;
