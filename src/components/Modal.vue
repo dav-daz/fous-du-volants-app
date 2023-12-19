@@ -13,7 +13,7 @@
 <template>
   <Teleport to="body">
   <Transition name="modal">
-    <div v-if="toolsStore.showModal" class="modal-mask">
+    <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-body">

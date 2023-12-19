@@ -23,7 +23,7 @@ import resetPlayers from "@/components/resetPlayers";
   </div>
 
   <!-- use the modal component, pass in the prop -->
-  <modal :show="toolsStore.showModal">
+  <modal v-if="toolsStore.showModal">
     <template #body>
       <!--
       On change de composant, grâce à <component> et :is
