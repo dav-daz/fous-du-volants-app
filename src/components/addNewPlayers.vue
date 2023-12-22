@@ -63,10 +63,12 @@
           v-html="texts.button.modal_close">
       </button>
       
-      <button @click="playersStore.addNewPlayers(newPlayersTemp)"
-              class="btn-modal"
-              type="button"
-              v-html="texts.button.add_to_list">
+      <button 
+            v-if="newPlayersTemp[0].nom != ''"
+            @click="playersStore.addNewPlayers(newPlayersTemp)"
+            class="btn-modal"
+            type="button"
+            v-html="texts.button.add_to_list">
       </button>
     </div>
 </template>

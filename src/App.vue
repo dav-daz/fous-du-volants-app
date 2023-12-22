@@ -26,7 +26,7 @@
 <style lang="scss">
 #app {
   .main-content {
-    margin-top: 9rem;
+    margin: 9rem 0 4rem 0;
     padding: 0 1rem;
   }
 }

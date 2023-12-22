@@ -1,145 +1,38 @@
 <script setup>
+  import tools from "@/components/tools";
   import { usePlayersStore } from "@/store/players";
+
   const playersStore = usePlayersStore();
 </script>
 
 <template>
   <tools />
 
-  <div class="all-persons-list">
-    <ul>
-      <li v-for="player in playersStore.registeredPersons"
-          :key="player.id"
-          class="all-persons-list-item">
+  <ul class="all-persons-list">
+    <li v-for="player in playersStore.registeredPersons"
+        :key="player.id"
+        class="all-persons-list-item">
 
-        <div v-bind:class="{selected: playersStore.playersSelected.find(el => el.id == player.id)}" class="person-card">
-          <p class="person-card-name">{{ player.nom }}</p>
-          <div class="person-card-buttons">
-            <button @click="playersStore.addPlayer(player)" 
-                    class="person-card-buttons-button add btn-icon" 
-                    type="button">
-              <fa-icon icon="user-plus" size="2x" />
-            </button>
+      <div v-bind:class="{selected: playersStore.playersSelected.find(el => el.id == player.id)}" class="person-card">
+        <p class="person-card-name">{{ player.nom }}</p>
+        <div class="person-card-buttons">
+          <button @click="playersStore.addPlayer(player)" 
+                  class="person-card-buttons-button add btn-icon" 
+                  type="button">
+            <fa-icon icon="user-plus" size="2x" />
+          </button>
 
-            <button @click="playersStore.deletePlayer(player)" 
-                    class="person-card-buttons-button delete btn-icon" 
-                    type="button">
-              <fa-icon icon="user-minus" size="2x" />
-            </button>
-          </div>
+          <button @click="playersStore.deletePlayer(player)" 
+                  class="person-card-buttons-button delete btn-icon" 
+                  type="button">
+            <fa-icon icon="user-minus" size="2x" />
+          </button>
         </div>
+      </div>
 
-      </li>
-    </ul>
-  </div>
-
-
-  <!-- use the modal component, pass in the prop -->
-  <!--  <modal :show="showModal">
-    <template #body>
-    -->
-      <!--
-      On change de composant, grâce à <component> et :is
-      Comme si on écrivait : <addNewPlayers @add-new-players="addNewPlayers" /> ou <resetPlayers @reset="reset" />
-      On récup aussi les $emit des composants
-
-      @add-new-players | @reset : $emit from 'resetPlayers.vue'
-      -->
-      <!--
-      <component :is="componentInModal" 
-                  @add-new-players="addNewPlayers" 
-                  @close="showModal = false" 
-                  @reset="reset" />
-    </template>
-  </modal>
-  -->
+    </li>
+  </ul>
 </template>
-
-<script>
-import tools from "@/components/tools";
-
-export default {
-  name: "players.vue",
-  components: {
-    tools
-  },
-  data() {
-    return {
-      registeredPersons : JSON.parse(localStorage.getItem('localRegisteredPersons')),
-      playersSelected: JSON.parse(localStorage.getItem('localPlayersSelected')),
-      newPlayers: [],
-    }
-  },
-  methods:{
-    addNewPlayers(players) {
-      for (var i = 0, length = players.length; i < length; i++) {
-        let playerName = players[i].nom;
-
-        if (playerName) {
-          // on prend le timestamp pour générer un id unique
-          let numberId = Date.now();
-
-          this.registeredPersons.push({
-            id: numberId,
-            nom: playerName
-          });
-
-          this.playersSelected.push({
-            id: numberId,
-            nom: playerName
-          });
-
-          this.newPlayers.push({
-            id: numberId
-          });
-        }
-
-        this.saveInLocal();
-        this.showModal = false;
-      }
-    },
-
-    saveInLocal() {
-      const parsedSelected = JSON.stringify(this.playersSelected);
-      localStorage.setItem('localPlayersSelected', parsedSelected);
-
-      const parsedRegistered = JSON.stringify(this.registeredPersons);
-      localStorage.setItem('localRegisteredPersons', parsedRegistered);
-
-      const parsedNewPlayers = JSON.stringify(this.newPlayers);
-      localStorage.setItem('localNewPlayers', parsedNewPlayers);
-    },
-
-    deleteNewPlayers() {
-      // on parcours le tableau 'newPlayers' pour prendre les id
-      for (var j = 0, length = this.newPlayers.length; j < length; j++) {
-        let idNewPlayer = this.newPlayers[j].id;
-
-        // retrouve l'index de "idNewPlayer" dans le tableau 'registeredPersons'
-        const indexPlayer = this.registeredPersons.map(i => i.id).indexOf(idNewPlayer);
-
-        if(indexPlayer > -1) {
-          // si on retrouve, on supprime du tableau
-          this.registeredPersons.splice(indexPlayer, 1);
-        }
-      }
-
-      this.newPlayers = [];
-    },
-
-    reset() {
-      this.$emit('reset-player-selected');
-      this.deleteNewPlayers();
-
-      localStorage.removeItem('localPlayersSelected');
-      localStorage.removeItem('localRegisteredPersons');
-      localStorage.removeItem('localNewPlayers');
-
-      this.showModal = false;
-    }
-  }
-}
-</script>
 
 <style lang="scss">
 #app {
@@ -152,8 +45,12 @@ export default {
   }
 
   .all-persons-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
     &-item {
-      margin-bottom: 1.5rem;
+      width: calc(50% - 0.5rem);
       list-style: none;
     }
   }

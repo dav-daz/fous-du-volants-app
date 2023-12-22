@@ -49,7 +49,7 @@
     width: 90%;
     max-width: 300px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 2rem;
     background-color: #fff;
     border-radius: $border-radius-4;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -78,7 +78,7 @@
 
   &-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 4rem;
     margin-top: 4rem;
   }

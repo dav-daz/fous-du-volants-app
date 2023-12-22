@@ -83,6 +83,7 @@ export const usePlayersStore = defineStore('players', {
 
         this.deleteNewPlayers();
         this.playersSelected = [];
+        this.registeredPersons = content.registeredPersons;
   
         toolsStore.showModal = false;
       }
