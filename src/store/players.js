@@ -8,9 +8,7 @@ export const usePlayersStore = defineStore('players', {
     state: () => ({
       registeredPersons: content.registeredPersons,
       playersSelected: [],
-      newPlayers: [
-        { nom :'' }
-      ]
+      newPlayers: []
     }),
     getters: {
 
@@ -39,30 +37,30 @@ export const usePlayersStore = defineStore('players', {
       addNewPlayers(players) {
         const toolsStore = useToolsStore();
 
-        for (var i = 0, length = players.length; i < length; i++) {
-          let playerName = players[i].nom;
-  
-          if (playerName) {
-            // on prend le timestamp pour générer un id unique
-            let numberId = Date.now();
+        if(players.length){
+          for (var i = 0, length = players.length; i < length; i++) {
+            let playerName = players[i].nom;
+            let playerID = players[i].id;
   
             this.registeredPersons.push({
-              id: numberId,
+              id: playerID,
               nom: playerName
             });
   
             this.playersSelected.push({
-              id: numberId,
+              id: playerID,
               nom: playerName
             });
   
             this.newPlayers.push({
-              id: numberId
+              id: playerID,
+              nom: playerName
             });
+    
+            toolsStore.showModal = false;
           }
-  
-          toolsStore.showModal = false;
         }
+        
       },
       deleteNewPlayers() {
         // on parcours le tableau 'newPlayers' pour prendre les id
@@ -78,9 +76,7 @@ export const usePlayersStore = defineStore('players', {
           }
         }
   
-        this.newPlayers = [
-          { nom :'' }
-        ];
+        this.newPlayers = [];
       },
       reset() {
         const toolsStore = useToolsStore();
