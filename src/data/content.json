@@ -9,6 +9,9 @@
     "title": "Initialiser ?",
     "text": "Cela retirera tous les joueurs et effacera ceux ajoutés."
   },
+  "matchs": {
+    "error_players": "Il n'y a pas assez de joueurs."
+  },
   "button": {
     "add_player": "Ajouter",
     "delete_player": "Retirer",
@@ -16,7 +19,8 @@
     "initialiser": "Initialiser",
     "modal_close": "Fermer",
     "init_confirm": "Oui",
-    "add_to_list": "Ajouter à la liste"
+    "add_to_list": "Ajouter à la liste",
+    "melanger_matchs": "Mélanger"
   },
   "registeredPersons" : [
     {

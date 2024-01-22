@@ -1,4 +1,6 @@
 <script setup>
+  import content from '@/data/content.json';
+
   import { reactive } from "vue";
   import { useToolsStore } from "@/store/tools";
   const toolsStore = useToolsStore();
@@ -33,7 +35,7 @@
 </script>
 
 <template>
-  <h3 class="modal-title">Ajouter des nouveaux joueurs</h3>
+  <h3 class="modal-title">{{ content.add_new_player.title }}</h3>
 
     <div
         v-for="(newPlayer, k) in newPlayersTemp"
@@ -60,7 +62,7 @@
       <button
           class="btn-modal"
           @click="closeModal"
-          v-html="texts.button.modal_close">
+          v-html="content.button.modal_close">
       </button>
       
       <button 
@@ -68,7 +70,7 @@
             @click="playersStore.addNewPlayers(newPlayersTemp)"
             class="btn-modal"
             type="button"
-            v-html="texts.button.add_to_list">
+            v-html="content.button.add_to_list">
       </button>
     </div>
 </template>

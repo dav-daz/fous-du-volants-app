@@ -1,4 +1,6 @@
 <script setup>
+  import content from '@/data/content.json';
+
   import { useToolsStore } from "@/store/tools";
   const toolsStore = useToolsStore();
 
@@ -13,21 +15,21 @@
 </script>
 
 <template>
-  <h3 class="modal-title" v-html="texts.resetPlayersTitle"></h3>
+  <h3 class="modal-title" v-html="content.reset_players.title"></h3>
 
-  <p class="modal-text" v-html="texts.resetPlayersText"></p>
+  <p class="modal-text" v-html="content.reset_players.text"></p>
 
   <div class="modal-footer">
     <button
         class="btn-modal"
         @click="closeModal"
-        v-html="texts.button.modal_close">
+        v-html="content.button.modal_close">
     </button>
     
     <button
         class="btn-modal"
         @click="playersStore.reset()"
-        v-html="texts.button.init_confirm">
+        v-html="content.button.init_confirm">
     </button>
   </div>
 </template>

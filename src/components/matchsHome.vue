@@ -1,4 +1,6 @@
 <script setup>
+  import content from '@/data/content.json';
+
   import { storeToRefs } from 'pinia';
   import { useMatchsStore } from "@/store/matchs";
   const matchsStore = useMatchsStore();
@@ -13,7 +15,7 @@
 <template>
   <p v-if="matchsStore.infos.nb_players > 1" class="shuffle">
     <button type="button" @click="start" class="shuffle-btn">
-      Mélanger 
+      {{ content.button.melanger_matchs }}
     </button>
   </p>
 
@@ -74,7 +76,7 @@
   </ul>
 
   <p v-if="matchsStore.infos.nb_players <= 1" class="msg-error-match">
-    Il n'y a pas assez de joueurs.
+    {{ content.matchs.error_players }}
   </p>
 </template>
 
