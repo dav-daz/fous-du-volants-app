@@ -59,7 +59,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 3rem;
+    gap: 1rem;
     padding: 1.6rem;
     background-color: $c-blue-light;
     border-radius: $border-radius-4;

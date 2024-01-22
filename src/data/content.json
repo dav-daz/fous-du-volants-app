@@ -7,7 +7,7 @@
   },
   "reset_players": {
     "title": "Initialiser ?",
-    "text": "Cela retirera tout les joueurs et effacera ceux ajoutés."
+    "text": "Cela retirera tous les joueurs et effacera ceux ajoutés."
   },
   "button": {
     "add_player": "Ajouter",
@@ -20,12 +20,6 @@
   },
   "registeredPersons" : [
     {
-      "id" : 1,
-      "nom" :"Armel",
-      "equipe" : [],
-      "adv" : []
-    },
-    {
       "id" : 2,
       "nom" :"Arnault",
       "equipe" : [],
@@ -33,13 +27,13 @@
     },
     {
       "id" : 3,
-      "nom" :"Benji",
+      "nom" :"Benjamin",
       "equipe" : [],
       "adv" : []
     },
     {
       "id" : 4,
-      "nom" : "Benjamin",
+      "nom" : "Benji",
       "equipe" : [],
       "adv" : []
     },
