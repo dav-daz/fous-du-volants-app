@@ -1,4 +1,6 @@
 <script setup>
+  import content from '@/data/content.json';
+
   //On importe storeToRefs pour écouter les changements
   import { storeToRefs } from "pinia";
 
@@ -16,14 +18,14 @@
     <button class="btn btn-icon players-title" 
             :class="{ 'selected' : tabsStore.currentTab === 'players'}" 
             @click="tabsStore.tabSelect('players')">
-      {{ tabsStore.texts.nbr_joueurs_select }} 
+      {{ content.tabs.players }}
       <span v-if="playersSelected.length" class="badge">{{ playersSelected.length }}</span>
     </button>
 
     <button class="btn btn-icon" 
             :class="{ 'selected' : tabsStore.currentTab === 'matchsHome'}"
             @click="tabsStore.tabSelect('matchsHome')">
-      Matchs
+      {{ content.tabs.matchs }}
     </button>
   </div>
 </template>

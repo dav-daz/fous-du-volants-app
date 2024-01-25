@@ -23,7 +23,9 @@ export const useMatchsStore = defineStore('matchs', {
         x2: []
       };
 
-      localStorage.removeItem(JSON.parse(window.localStorage.getItem('matchs')).matchs);
+      if(window.localStorage.getItem('matchs')) {
+        localStorage.removeItem(JSON.parse(window.localStorage.getItem('matchs')).matchs);
+      }
     },
 
     increment() {

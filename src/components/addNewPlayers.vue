@@ -82,6 +82,10 @@
     gap: 1.5rem;
     margin-bottom: 1.5rem;
 
+    input[type=text] {
+      width: 18rem;
+    }
+
     .svg-inline--fa {
       font-size: 3rem;
     }

@@ -9,6 +9,10 @@
     "title": "Initialiser ?",
     "text": "Cela retirera tous les joueurs et effacera ceux ajoutés."
   },
+  "tabs": {
+    "players": "Joueurs",
+    "matchs": "Matchs"
+  },
   "matchs": {
     "error_players": "Il n'y a pas assez de joueurs."
   },

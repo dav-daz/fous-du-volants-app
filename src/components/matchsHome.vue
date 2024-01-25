@@ -4,8 +4,13 @@
   import { storeToRefs } from 'pinia';
   import { useMatchsStore } from "@/store/matchs";
   const matchsStore = useMatchsStore();
+  let playersSelct = true;
 
-  matchsStore.init(JSON.parse(window.localStorage.getItem('players')).playersSelected);
+  if(window.localStorage.getItem('players')){
+    matchsStore.init(JSON.parse(window.localStorage.getItem('players')).playersSelected);
+  }else{
+    playersSelct = false;
+  }
 
   function start() {
     matchsStore.init(JSON.parse(window.localStorage.getItem('players')).playersSelected);
@@ -75,7 +80,7 @@
     </li>
   </ul>
 
-  <p v-if="matchsStore.infos.nb_players <= 1" class="msg-error-match">
+  <p v-if="matchsStore.infos.nb_players <= 1 || playersSelct == false" class="msg-error-match">
     {{ content.matchs.error_players }}
   </p>
 </template>
