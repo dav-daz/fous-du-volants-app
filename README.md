@@ -15,13 +15,13 @@ npm run serve
 npm run build
 ```
 
-### Tester l'application compilée avec le package npm serve
+### Test compile app with the package npm serve
 ```
-// installer le package 
+// install package 
 npm install -g serve
 
-// lancer le serveur 
-serve -s chemin_vers_dist
+// lunch server 
+serve -s path_to_dist_folder
 ```
 
 ### Lints and fixes files
@@ -50,3 +50,17 @@ See [Documentation 1](https://blog.fontawesome.com/how-to-use-vue-js-with-font-a
 ```bash
 npm install pinia
 ```
+### Deploy on github pages
+Cf in ```package.json```
+```
+"deploy": "npm run build ; git add . ; git commit -m 'Deploy'",
+"postdeploy": "git push ; git subtree push --prefix dist origin gh-pages"
+```
+
+Or run the commands :
+```bash
+npm run build ; git add . ; git commit -m 'Deploy'
+git push ; git subtree push --prefix dist origin gh-pages
+```
+
+```;``` is for windows powershell, for Linux, replace by ```&&```
