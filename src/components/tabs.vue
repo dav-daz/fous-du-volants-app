@@ -38,17 +38,18 @@
     display: flex;
     padding-top: 1rem;
     justify-content: left;
-    border-bottom: 1px solid $c-grey;
-    background-color: $c-white;
+    border-bottom: 1px solid var(--tabs-border);
+    background-color: var(--tabs-background);
     width: 100%;
 
     .btn {
       font-size: 2rem;
       font-weight: 700;
       padding: 1rem 2rem;
+      color: var(--text);
 
       &.selected {
-        border-bottom: 2px solid $c-modal-btn;
+        border-bottom: 2px solid var(--violet);
       }
     }
 
@@ -64,11 +65,11 @@
         font-weight: 700;
         height: 2rem;
         width: 2rem;
-        background-color: $c-modal-btn;
+        background-color: var(--violet);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: $c-white;
+        color: var(--white);
         border-radius: 50%;
       }
     }

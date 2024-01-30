@@ -1,5 +1,32 @@
 @import '@/assets/styles/_variables.scss';
 
+:root {
+  --white: #fff;
+  --background: #f5f5f5;
+  --tabs-background: #fff;
+  --tabs-border: #fff;
+  --card-background: #d1e3eb;
+  --card-background-selected: #99ed6f;
+  --violet: #6200ee;
+  --btn-player-add-remove: #000;
+  --text: #000;
+  --red: #f0483e;
+
+  // https://atlassian.design/foundations/color-new/color-palette-new
+  // https://colorhunt.co/palettes/dark
+  .dark-theme {
+    --white: #C7D1DB;
+    --background: #1D2125;
+    --tabs-background: #1D2125;
+    --tabs-border: #2C333A;
+    --card-background: #22272B;
+    --card-background-selected: #2C333A;
+    --violet: #610094;
+    --text: #596773;
+    --red: #C84B31;
+  }
+}
+
 /// Base font-size for html equates to 10px : allows using rem font-sizes everywhere by dividing / 10.
 /// Ex : 2rem will equate to 20px.
 html {
@@ -10,8 +37,9 @@ html {
 
 body {
   font-family: $ff-default;
-  background-color: $c-grey;
+  background-color: var(--background);
   font-size: 1.6rem;
+  color: var(--text);
   margin: 0;
 }
 

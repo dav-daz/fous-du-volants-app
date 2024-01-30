@@ -54,12 +54,16 @@ import resetPlayers from "@/components/resetPlayers";
     gap: 1.5rem;
     margin-bottom: 4rem;
 
-    .btn-init {
-      color: $c-white;
-      background-color: $c-red;
+    .btn-init,
+    .btn-add-players {
+      color: var(--white);
       height: 3.5rem;
       width: 3.5rem;
       border-radius: 50%;
+    }
+
+    .btn-init {
+      background-color: var(--red);
 
       .fa-trash {
         font-size: 2rem;
@@ -67,12 +71,8 @@ import resetPlayers from "@/components/resetPlayers";
     }
 
     .btn-add-players {
-      color: $c-white;
-      background-color: $c-modal-btn;
-      height: 3.5rem;
-      width: 3.5rem;
-      border-radius: 50%;
-
+      background-color: var(--violet);
+      
       .fa-plus {
         font-size: 2.5rem;
       }

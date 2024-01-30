@@ -61,7 +61,7 @@
     justify-content: space-between;
     gap: 1rem;
     padding: 1.6rem;
-    background-color: $c-blue-light;
+    background-color: var(--card-background);
     border-radius: $border-radius-4;
     transition: all ease-in-out 0.3s;
 
@@ -72,6 +72,8 @@
 
     &-buttons {
       &-button {
+        color: var(--text);
+
         &.delete {
           display: none;
         }
@@ -79,8 +81,7 @@
     }
 
     &.selected {
-      background-color: $c-green;
-      //box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+      background-color: var(--card-background-selected);
 
       .add {
         display: none;
@@ -89,30 +90,6 @@
       .delete {
         display: inline-block;
       }
-    }
-  }
-
-  .btn-init {
-    color: $c-white;
-    background-color: $c-red;
-    height: 3.5rem;
-    width: 3.5rem;
-    border-radius: 50%;
-
-    .fa-trash {
-      font-size: 2rem;
-    }
-  }
-
-  .btn-add-players {
-    color: $c-white;
-    background-color: $c-modal-btn;
-    height: 3.5rem;
-    width: 3.5rem;
-    border-radius: 50%;
-
-    .fa-plus {
-      font-size: 2.5rem;
     }
   }
 }
