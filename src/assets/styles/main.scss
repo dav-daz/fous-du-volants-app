@@ -7,23 +7,31 @@
   --tabs-border: #fff;
   --card-background: #d1e3eb;
   --card-background-selected: #99ed6f;
+  --modale-background: #fff;
+  --modale-text: #000;
   --violet: #6200ee;
   --btn-player-add-remove: #000;
   --text: #000;
   --red: #f0483e;
+  --green: #99ed6f;
 
   // https://atlassian.design/foundations/color-new/color-palette-new
   // https://colorhunt.co/palettes/dark
   .dark-theme {
     --white: #C7D1DB;
-    --background: #1D2125;
+    --background: #292335;
     --tabs-background: #1D2125;
-    --tabs-border: #2C333A;
-    --card-background: #22272B;
-    --card-background-selected: #2C333A;
-    --violet: #610094;
-    --text: #596773;
+    --tabs-border: #3F384C;
+    --card-background: #2D2836;
+    --card-background-selected: #3F384C;
+    --input-background: #292335;
+    --input-background-focus: #4B4655;
+    --modale-background: #3F384C;
+    --modale-text: #fff;
+    --violet: #513a7a;
+    --text: #d4bbff;
     --red: #C84B31;
+    --green: #1F845A;
   }
 }
 
@@ -75,29 +83,25 @@ button {
   padding: 0;
 }
 
-.btn-modal {
-  @extend .btn-icon;
-
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: $c-modal-btn;
-  padding: 0.8rem;
-}
-
 input {
   &[type='text'] {
     font-size: 1.5rem;
-    background-color: $c-grey;
+    background-color: var(--input-background);
+    color: var(--text);
     border: none;
     border-bottom-color: rgba(0,0,0,0.42);
     border-bottom: 1px solid;
     border-radius: 4px 4px 0 0;
     padding: 1rem 1.6rem;
 
+    &::placeholder {
+      color: var(--text);
+      opacity: 0.5;
+    }
+
     &:focus {
       outline: none;
-      border-bottom-color: $c-modal-btn;
+      background-color: var(--input-background-focus);
     }
   }
 }

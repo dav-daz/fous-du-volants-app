@@ -50,7 +50,8 @@
     max-width: 300px;
     margin: 0 auto;
     padding: 2rem;
-    background-color: #fff;
+    background-color: var(--modale-background);
+    color: var(--text);
     border-radius: $border-radius-4;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.5s ease;
@@ -88,6 +89,16 @@
       color: red;
     }
   }
+
+  &-btn {
+  @extend .btn-icon;
+
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text);
+  padding: 0.8rem;
+}
 }
 
 /*

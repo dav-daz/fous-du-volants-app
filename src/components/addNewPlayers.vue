@@ -60,7 +60,7 @@
 
     <div class="modal-footer">
       <button
-          class="btn-modal"
+          class="modal-btn"
           @click="closeModal"
           v-html="content.button.modal_close">
       </button>
@@ -68,7 +68,7 @@
       <button 
             v-if="newPlayersTemp[0].nom != ''"
             @click="playersStore.addNewPlayers(newPlayersTemp)"
-            class="btn-modal"
+            class="modal-btn"
             type="button"
             v-html="content.button.add_to_list">
       </button>
@@ -91,11 +91,11 @@
     }
 
     .btn-add {
-      color: $c-green;
+      color: var(--green);
     }
 
     .btn-remove {
-      color: $c-red;
+      color: var(--red);
     }
   }
 </style>

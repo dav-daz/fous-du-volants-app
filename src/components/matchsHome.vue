@@ -93,7 +93,7 @@
 
     &-btn {
       border: none;
-      background-color: $c-green;
+      background-color: var(--green);
       padding: 1rem 1.5rem;
       border-radius: 3rem;
       font-size: 1.5rem;
@@ -110,19 +110,14 @@
 
   .msg-error-match {
     text-align: center;
-    color: $c-red;
+    color: var(--red);
     font-weight: 700;
   }
   .match {
     font-size: 1.5rem;
     border-radius: $border-radius-4;
-    background-color: $c-blue-light;
+    background-color: var(--card-background-selected);
     padding: 1rem;
-
-    &-head {
-      color: rgba($c-black, 0.5);
-      margin-bottom: 1rem;
-    }
 
     &-detail {
       text-align: center;

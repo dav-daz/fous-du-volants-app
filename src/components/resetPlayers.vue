@@ -21,13 +21,13 @@
 
   <div class="modal-footer">
     <button
-        class="btn-modal"
+        class="modal-btn"
         @click="closeModal"
         v-html="content.button.modal_close">
     </button>
     
     <button
-        class="btn-modal"
+        class="modal-btn"
         @click="playersStore.reset()"
         v-html="content.button.init_confirm">
     </button>
