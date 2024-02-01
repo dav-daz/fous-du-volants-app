@@ -9,6 +9,7 @@
   --card-background-selected: #99ed6f;
   --modale-background: #fff;
   --modale-text: #000;
+  --toggle-theme-background: #d1e3eb;
   --violet: #6200ee;
   --btn-player-add-remove: #000;
   --text: #000;
@@ -17,7 +18,8 @@
 
   // https://atlassian.design/foundations/color-new/color-palette-new
   // https://colorhunt.co/palettes/dark
-  .dark-theme {
+  &[data-theme="dark"] {
+  //@media (prefers-color-scheme: dark){
     --white: #C7D1DB;
     --background: #292335;
     --tabs-background: #1D2125;
@@ -28,6 +30,7 @@
     --input-background-focus: #4B4655;
     --modale-background: #3F384C;
     --modale-text: #fff;
+    --toggle-theme-background: #3F384C;
     --violet: #513a7a;
     --text: #d4bbff;
     --red: #C84B31;
@@ -104,4 +107,16 @@ input {
       background-color: var(--input-background-focus);
     }
   }
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
 }

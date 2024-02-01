@@ -1,4 +1,5 @@
 <script setup>
+  import toggleTheme from "@/components/toggleTheme";
   import content from '@/data/content.json';
 
   //On importe storeToRefs pour écouter les changements
@@ -15,7 +16,8 @@
 
 <template>
   <div class="tabs">
-    <button class="btn btn-icon players-title" 
+    <div class="tabs-col-left">
+      <button class="btn btn-icon players-title" 
             :class="{ 'selected' : tabsStore.currentTab === 'players'}" 
             @click="tabsStore.tabSelect('players')">
       {{ content.tabs.players }}
@@ -27,6 +29,11 @@
             @click="tabsStore.tabSelect('matchsHome')">
       {{ content.tabs.matchs }}
     </button>
+    </div>
+
+    <div class="tabs-col-right">
+      <toggleTheme />
+    </div>
   </div>
 </template>
 
@@ -37,10 +44,16 @@
     top: 0;
     display: flex;
     padding-top: 1rem;
-    justify-content: left;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
     border-bottom: 1px solid var(--tabs-border);
     background-color: var(--tabs-background);
     width: 100%;
+
+    &-col-right {
+      margin-right: 3rem;
+    }
 
     .btn {
       font-size: 2rem;
