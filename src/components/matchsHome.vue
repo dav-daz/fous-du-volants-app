@@ -4,6 +4,9 @@
   import { storeToRefs } from 'pinia';
   import { useMatchsStore } from "@/store/matchs";
   const matchsStore = useMatchsStore();
+
+  matchsStore.setMaxTerrains(4);
+  
   let playersSelct = true;
 
   if(window.localStorage.getItem('players')){
@@ -28,21 +31,43 @@
     <li v-for="(match, indexMatch) in matchsStore.matchs.x4" class="match">
       <!--<div class="match-head">Match {{ matchsStore.matchNumber }}</div>-->
       <div class="match-detail">
-          <template v-for="(team, indexTeam) in match">
-            <p class="match-team">
-              <template v-for="(player, indexPlayer) in team">
-                <span v-if="indexPlayer === 1"> et </span>
-                {{ player }}
-              </template>
-            </p>
-            <p v-if="indexTeam === 0" class="vs-sep">contre</p>
-          </template>
-        </div>
+        <template v-for="(team, indexTeam) in match">
+          <p class="match-team">
+            <template v-for="(player, indexPlayer) in team">
+              <span v-if="indexPlayer === 1"> et </span>
+              {{ player }}
+            </template>
+          </p>
+          <p v-if="indexTeam === 0" class="vs-sep">contre</p>
+        </template>
+      </div>
     </li>
   </ul>
 
-  <ul class="type-match" v-if="matchsStore.matchs.x5.length">
-    <li v-for="(match, indexMatch) in matchsStore.matchs.x5" class="match">
+  <ul class="type-match" v-if="matchsStore.matchs.x5.length || matchsStore.matchs.x6.length || matchsStore.matchs.x7.length">
+    <li v-if="matchsStore.matchs.x5.length" v-for="(match, indexMatch) in matchsStore.matchs.x5" class="match">
+      <!--<div class="match-head">Match {{ matchsStore.matchNumber }}</div>-->
+      <div class="match-detail">
+        <p class="match-team">
+            <template v-for="(player, playerIndex) in match">
+              {{ player }}<template v-if="playerIndex != match.length -1">, </template>
+            </template>
+          </p>
+      </div>
+    </li>
+
+    <li v-if="matchsStore.matchs.x6.length" v-for="(match, indexMatch) in matchsStore.matchs.x6" class="match">
+      <!--<div class="match-head">Match {{ matchsStore.matchNumber }}</div>-->
+      <div class="match-detail">
+        <p class="match-team">
+            <template v-for="(player, playerIndex) in match">
+              {{ player }}<template v-if="playerIndex != match.length -1">, </template>
+            </template>
+          </p>
+      </div>
+    </li>
+
+    <li v-if="matchsStore.matchs.x7.length" v-for="(match, indexMatch) in matchsStore.matchs.x7" class="match">
       <!--<div class="match-head">Match {{ matchsStore.matchNumber }}</div>-->
       <div class="match-detail">
         <p class="match-team">
