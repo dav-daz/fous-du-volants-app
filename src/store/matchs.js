@@ -12,7 +12,8 @@ export const useMatchsStore = defineStore('matchs', {
       x7: []
     },
     matchNumber: 0,
-    maxTerrains: 1
+    maxTerrains: 1,
+    errorMessage: null // Ajout de la variable pour le message d'erreur
   }),
   actions: {
     resetMatch() {
@@ -39,8 +40,12 @@ export const useMatchsStore = defineStore('matchs', {
 
       return this.matchNumber;
     },
+    clearError() { // Méthode pour réinitialiser le message d'erreur
+      this.errorMessage = null;
+    },
     init(playersArray) {
       this.resetMatch();
+      this.clearError(); // Ajoutez cette ligne pour réinitialiser le message d'erreur
     
       if (playersArray && playersArray.length) {
         this.infos = this.infosMatchs(playersArray);
@@ -140,13 +145,22 @@ export const useMatchsStore = defineStore('matchs', {
      * @return {array} un tableau des infos.
      */
     infosMatchs(array) {
-      if (array.length) {
-        const nbJoueurs = array.length;
-        const maxTerrains = this.maxTerrains;
+      const nbJoueurs = array.length;
+      const maxTerrains = this.maxTerrains;
 
+      if (nbJoueurs > 0) {
         //console.log("Nombre de joueurs:", nbJoueurs, "Max terrains:", maxTerrains); // Pour le débogage
 
         let distribution = this.distributePlayersOnCourts(nbJoueurs, maxTerrains);
+
+        // Si distributePlayersOnCourts retourne null, cela signifie qu'une distribution n'est pas possible
+        if (!distribution) {
+          // Au lieu de retourner juste le nombre de joueurs, on peut retourner un objet indiquant l'échec
+          return {
+            nb_players: nbJoueurs,
+            distribution_failed: true
+          };
+        }
 
         return {
           'nb_players': nbJoueurs,
@@ -163,6 +177,15 @@ export const useMatchsStore = defineStore('matchs', {
       }
     },
     distributePlayersOnCourts(totalPlayers, maxCourts) {
+      // Calculer le nombre minimum de terrains nécessaires
+      let minCourtsNeeded = Math.ceil(totalPlayers / 7);
+      
+      // Si le nombre minimum de terrains nécessaires dépasse maxCourts, retourner null
+      if (minCourtsNeeded > maxCourts) {
+        this.errorMessage = `Attention: Il y a trop de joueurs (${totalPlayers}) par rapport au nombre de terrains disponibles (${maxCourts}). <br><br>Au moins ${minCourtsNeeded} terrains seraient nécessaires. <br><br>Le nombre max de joueurs par terrain est de 7.`;
+        return null;
+      }
+
       let distribution = { totalCourts: 0 };
       let remainingPlayers = totalPlayers;
     
