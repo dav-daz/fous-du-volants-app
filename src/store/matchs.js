@@ -12,7 +12,7 @@ export const useMatchsStore = defineStore('matchs', {
       x7: []
     },
     matchNumber: 0,
-    maxTerrains: 1,
+    maxTerrains: parseInt(localStorage.getItem('maxTerrains')) || 4, // Valeur par défaut de 5,
     errorMessage: null // Ajout de la variable pour le message d'erreur
   }),
   actions: {
@@ -33,6 +33,7 @@ export const useMatchsStore = defineStore('matchs', {
 
     setMaxTerrains(number) {
       this.maxTerrains = number;
+      localStorage.setItem('maxTerrains', number.toString());
     },
 
     increment() {

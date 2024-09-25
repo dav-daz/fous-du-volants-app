@@ -1,15 +1,15 @@
 <script setup>
+  
   import content from '@/data/content.json';
 
   import { useMatchsStore } from "@/store/matchs";
 
+  import ItemSelectNumberTerrains from '@/components/items/ItemSelectNumberTerrains.vue';
   import ItemMatchMultiPlayers from '@/components/items/ItemMatchMultiPlayers.vue';
   import ItemMatchX2Players from '@/components/items/ItemMatchX2Players.vue';
   import ItemMatchX4Players from '@/components/items/ItemMatchX4Players.vue';
 
   const matchsStore = useMatchsStore();
-
-  matchsStore.setMaxTerrains(4);
 
   let playersSelct = true;
 
@@ -37,6 +37,8 @@
         {{ content.button.melanger_matchs }}
       </button>
     </p>
+
+    <ItemSelectNumberTerrains />
 
     <ul class="type-match" v-if="matchsStore.matchs.x4.length">
       <li v-for="(match, indexMatch) in matchsStore.matchs.x4" class="match">
