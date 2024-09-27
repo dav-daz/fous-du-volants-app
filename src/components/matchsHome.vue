@@ -29,6 +29,8 @@
 </script>
 
 <template>
+  <ItemSelectNumberTerrains />
+
   <p v-if="matchsStore.errorMessage" v-html="matchsStore.errorMessage" class="msg-error-match"></p>
   
   <template v-else>
@@ -37,8 +39,6 @@
         {{ content.button.melanger_matchs }}
       </button>
     </p>
-
-    <ItemSelectNumberTerrains />
 
     <ul class="type-match" v-if="matchsStore.matchs.x4.length">
       <li v-for="(match, indexMatch) in matchsStore.matchs.x4" class="match">
