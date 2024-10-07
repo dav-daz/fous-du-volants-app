@@ -1,5 +1,5 @@
 <script setup>
-  import { useTogglethemeStore } from "@/store/toggletheme";
+  import { useTogglethemeStore } from "@/store/toggletheme.js";
   const togglethemeStore = useTogglethemeStore();
 
   togglethemeStore.initPreferTheme();

@@ -7,30 +7,13 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run dev
 ```
 
 ### Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Test compile app with the package npm serve
-```
-// install package 
-npm install -g serve
-
-// lunch server 
-serve -s path_to_dist_folder
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Installer sass :
 ```bash

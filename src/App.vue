@@ -1,9 +1,9 @@
 <script setup>
-  import tabs from "@/components/tabs";
-  import players from "@/components/players";
-  import matchsHome from "@/components/matchsHome";
+  import tabs from "@/components/tabs.vue";
+  import players from "@/components/players.vue";
+  import matchsHome from "@/components/matchsHome.vue";
 
-  import { useTabsStore } from "@/store/tabs";
+  import { useTabsStore } from "@/store/tabs.js";
   
   //On importe storeToRefs pour écouter les changements
   import { storeToRefs } from "pinia";

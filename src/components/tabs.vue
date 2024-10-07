@@ -1,14 +1,14 @@
 <script setup>
-  import toggleTheme from "@/components/toggleTheme";
+  import toggleTheme from "@/components/toggleTheme.vue";
   import content from '@/data/content.json';
 
   //On importe storeToRefs pour écouter les changements
   import { storeToRefs } from "pinia";
 
-  import { useTabsStore } from "@/store/tabs";
+  import { useTabsStore } from "@/store/tabs.js";
   const tabsStore = useTabsStore();
 
-  import { usePlayersStore } from "@/store/players";
+  import { usePlayersStore } from "@/store/players.js";
   
   //Sert à détecter les changements du store playersStore défini au-dessus
   const { playersSelected } = storeToRefs(usePlayersStore());
