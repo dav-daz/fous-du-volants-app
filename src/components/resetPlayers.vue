@@ -1,10 +1,10 @@
 <script setup>
   import content from '@/data/content.json';
 
-  import { useToolsStore } from "@/store/tools";
+  import { useToolsStore } from "@/store/tools.js";
   const toolsStore = useToolsStore();
 
-  import { usePlayersStore } from "@/store/players";
+  import { usePlayersStore } from "@/store/players.js";
   const playersStore = usePlayersStore();
   
   const texts = toolsStore.texts;

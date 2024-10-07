@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { useToolsStore } from "@/store/tools";
+import { useToolsStore } from "@/store/tools.js";
 
 import content from '@/data/content.json';
 

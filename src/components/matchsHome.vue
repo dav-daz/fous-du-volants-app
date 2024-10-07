@@ -2,7 +2,7 @@
   
   import content from '@/data/content.json';
 
-  import { useMatchsStore } from "@/store/matchs";
+  import { useMatchsStore } from "@/store/matchs.js";
 
   import ItemSelectNumberTerrains from '@/components/items/ItemSelectNumberTerrains.vue';
   import ItemMatchMultiPlayers from '@/components/items/ItemMatchMultiPlayers.vue';

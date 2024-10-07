@@ -1,10 +1,10 @@
 <script setup>
-import { useToolsStore } from "@/store/tools";
+import { useToolsStore } from "@/store/tools.js";
 const toolsStore = useToolsStore();
 
-import modal from "@/components/Modal";
-import addNewPlayers  from '@/components/addNewPlayers';
-import resetPlayers from "@/components/resetPlayers";
+import modal from "@/components/Modal.vue";
+import addNewPlayers  from '@/components/addNewPlayers.vue';
+import resetPlayers from "@/components/resetPlayers.vue";
 </script>
 
 <template>

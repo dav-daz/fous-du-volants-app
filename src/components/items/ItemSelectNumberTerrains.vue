@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 
-import { useMatchsStore } from "@/store/matchs";
+import { useMatchsStore } from "@/store/matchs.js";
 import { storeToRefs } from 'pinia';
 
 const matchsStore = useMatchsStore();

@@ -1,5 +1,5 @@
 <script setup>
-  import { useToolsStore } from "@/store/tools";
+  import { useToolsStore } from "@/store/tools.js";
   
   //On importe storeToRefs pour écouter les changements
   import { storeToRefs } from "pinia";

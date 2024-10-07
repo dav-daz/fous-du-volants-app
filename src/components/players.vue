@@ -1,6 +1,6 @@
 <script setup>
-  import tools from "@/components/tools";
-  import { usePlayersStore } from "@/store/players";
+  import tools from "@/components/tools.vue";
+  import { usePlayersStore } from "@/store/players.js";
 
   const playersStore = usePlayersStore();
 </script>
