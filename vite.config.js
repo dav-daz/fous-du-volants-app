@@ -7,7 +7,6 @@ import autoprefixer from 'autoprefixer'
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [vue()],
-  base: mode === 'production' ? '/fousduvolants-app/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
