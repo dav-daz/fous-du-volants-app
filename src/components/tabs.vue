@@ -1,5 +1,4 @@
 <script setup>
-  import toggleTheme from "@/components/toggleTheme.vue";
   import content from '@/data/content.json';
 
   //On importe storeToRefs pour écouter les changements
@@ -32,7 +31,7 @@
     </div>
 
     <div class="tabs-col-right">
-      <toggleTheme />
+      
     </div>
   </div>
 </template>
