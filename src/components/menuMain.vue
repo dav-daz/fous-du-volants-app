@@ -1,5 +1,6 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import { supabase } from '@/lib/supabaseClient';
 import toggleTheme from "@/components/toggleTheme.vue";
 
 const isMenuOpen = ref(false);
@@ -7,6 +8,18 @@ const isMenuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+const getJoueurs = async () => {
+    try {
+      let { data: Joueurs, error } = await supabase.from('Joueurs').select('*')
+    
+      console.log(Joueurs)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  getJoueurs()
 
 watch(isMenuOpen, (newValue) => {
   if (newValue) {
@@ -26,7 +39,22 @@ watch(isMenuOpen, (newValue) => {
 
    <Transition name="slide-fade">
       <div v-show="isMenuOpen" class="menu-main-content">
-        <toggleTheme />
+        <div class="menu-main-top">
+          <toggleTheme />
+        </div>
+        
+        <ul class="main-navigation">
+          <li>
+            <RouterLink to="/sign-in">Se connecter</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/sign-up">Créer un compte</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/">Joueurs et matchs</RouterLink>
+          </li>
+        </ul>
+
       </div>
     </Transition>
     <button class="btn-icon menu-main-toggle" @click="toggleMenu" type="button">
@@ -67,11 +95,15 @@ watch(isMenuOpen, (newValue) => {
       top: 0;
       right: 0;
       background-color: var(--menu-background);
-      padding: 3rem;
+      padding: 1.5rem;
       width: 20rem;
       height: 100%;
       box-sizing: border-box;
       z-index: 101;
+   }
+
+   &-top {
+    text-align: right;
    }
 
    &.open {
@@ -89,6 +121,19 @@ watch(isMenuOpen, (newValue) => {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
     backdrop-filter: blur(2px);
+  }
+}
+
+.main-navigation {
+  margin-top: 3rem;
+
+  a {
+    display: block;
+    padding: 1rem;
+    margin-block: 1rem;
+    color: var(--text);
+    border-radius: 0.4rem;
+    background-color: var(--card-background-selected);
   }
 }
 
