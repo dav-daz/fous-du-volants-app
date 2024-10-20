@@ -1,16 +1,25 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import { routes } from './routes.js';
 
 // font-awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faUserPlus, faUserMinus, faXmark, faTrash, faSquarePlus, faSquareMinus, faPlus, faBars } from "@fortawesome/free-solid-svg-icons";
 
+
 library.add(faUserPlus, faUserMinus, faXmark, faTrash, faSquarePlus, faSquareMinus, faPlus, faBars);
 
 const pinia = createPinia()
-const app = createApp(App);
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+const app = createApp(App)
 
 //createApp(App).component("fa-icon", FontAwesomeIcon).mount('#app');
 
@@ -38,4 +47,5 @@ pinia.use((context) => {
 
 app.component("fa-icon", FontAwesomeIcon);
 app.use(pinia);
+app.use(router);
 app.mount('#app');
