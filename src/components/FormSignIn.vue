@@ -1,5 +1,20 @@
 <script setup>
+import { ref } from "vue";
 
+import { useSessionStore } from '@/store/session';
+const sessionStore = useSessionStore();
+
+import { useAuthStore } from '@/store/auth';
+const authStore = useAuthStore();
+
+sessionStore.checkLoggedIn();
+
+let email = ref("");
+let password = ref("");
+
+const login = async () => {
+  await authStore.login(email.value, password.value);
+}
 </script>
 
 <template>
@@ -15,7 +30,7 @@
 	</div>
 
 	<div class="form-actions">
-		<button class="modal-btn" type="button">Se connecter</button>
+		<button class="modal-btn" type="button" @click="login">Se connecter</button>
 	</div>
 </form>
 </template>

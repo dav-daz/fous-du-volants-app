@@ -1,6 +1,7 @@
-import HomePage from "./pages/Home.vue"
-import SignInPage from "./pages/SignIn.vue"
-import SignUpPage from "./pages/SignUp.vue"
+import HomePage from "./pages/HomePage.vue"
+import SignInPage from "./pages/SignInPage.vue"
+import SignUpPage from "./pages/SignUpPage.vue"
+import NotFoundPage from "./pages/NotFoundPage.vue"
 
 export const routes = [
   {
@@ -14,5 +15,9 @@ export const routes = [
   {
     path: '/sign-up',
     component: SignUpPage
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFoundPage
   }
 ]
