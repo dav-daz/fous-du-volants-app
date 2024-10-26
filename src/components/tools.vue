@@ -53,30 +53,6 @@ import resetPlayers from "@/components/resetPlayers.vue";
     align-items: center;
     gap: 1.5rem;
     margin-bottom: 4rem;
-
-    .btn-init,
-    .btn-add-players {
-      color: var(--white);
-      height: 3.5rem;
-      width: 3.5rem;
-      border-radius: 50%;
-    }
-
-    .btn-init {
-      background-color: var(--red);
-
-      .fa-trash {
-        font-size: 2rem;
-      }
-    }
-
-    .btn-add-players {
-      background-color: var(--violet);
-      
-      .fa-plus {
-        font-size: 2.5rem;
-      }
-    }
   }
 }
 </style>
