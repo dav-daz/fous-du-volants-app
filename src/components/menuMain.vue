@@ -1,7 +1,20 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
+
 import { supabase } from '@/lib/supabaseClient';
 import toggleTheme from "@/components/toggleTheme.vue";
+
+import { useSessionStore } from '@/store/session';
+const sessionStore = useSessionStore();
+
+import { useAuthStore } from '@/store/auth';
+const authStore = useAuthStore();
+
+sessionStore.checkLoggedIn();
+
+const logout = async () => {
+  await authStore.logout();
+}
 
 const isMenuOpen = ref(false);
 
@@ -19,7 +32,7 @@ const getJoueurs = async () => {
     }
   }
 
-  getJoueurs()
+  //getJoueurs()
 
 watch(isMenuOpen, (newValue) => {
   if (newValue) {
@@ -44,16 +57,18 @@ watch(isMenuOpen, (newValue) => {
         </div>
         
         <ul class="main-navigation">
-          <li>
+          <li v-if="!sessionStore.isLoggedIn">
             <RouterLink to="/sign-in">Se connecter</RouterLink>
           </li>
-          <li>
+          <li v-if="!sessionStore.isLoggedIn">
             <RouterLink to="/sign-up">Créer un compte</RouterLink>
           </li>
           <li>
             <RouterLink to="/">Joueurs et matchs</RouterLink>
           </li>
         </ul>
+
+        <button v-if="sessionStore.isLoggedIn" @click="logout">Se déconnecter</button>
 
       </div>
     </Transition>
