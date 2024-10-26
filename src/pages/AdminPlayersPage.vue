@@ -7,7 +7,10 @@ const Joueurs = ref([]);
 
 const getJoueurs = async () => {
   try {
-    const { data, error } = await supabase.from('Joueurs').select('*');
+    const { data, error } = await supabase
+     .from('Joueurs')
+     .select('*')
+     .order('nom', { ascending: true });
 
     if (error) {
       console.log(error);
