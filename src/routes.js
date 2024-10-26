@@ -1,6 +1,7 @@
 import HomePage from "./pages/HomePage.vue"
 import SignInPage from "./pages/SignInPage.vue"
 import SignUpPage from "./pages/SignUpPage.vue"
+import AdminPlayersPage from "./pages/AdminPlayersPage.vue"
 import NotFoundPage from "./pages/NotFoundPage.vue"
 
 import { useSessionStore } from '@/store/session'
@@ -20,6 +21,11 @@ const routes = [
     path: '/sign-up',
     component: SignUpPage,
     meta: { requiresGuest: true }
+  },
+  {
+    path: '/admin-players',
+    component: AdminPlayersPage,
+    meta: { requiresAuth: true }
   },
   {
     path: '/:pathMatch(.*)*',

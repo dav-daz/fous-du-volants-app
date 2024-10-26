@@ -149,3 +149,37 @@ input {
     margin-top: 3rem;
   }
 }
+
+.btn-init,
+.btn-add-players,
+.btn-delete,
+.btn-edit {
+  color: var(--white);
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+}
+
+.btn-init,
+.btn-delete {
+  background-color: var(--red);
+
+  .svg-inline--fa {
+    font-size: 2rem;
+  }
+}
+
+.btn-add-players,
+.btn-edit {
+  background-color: var(--violet);
+  
+  .svg-inline--fa {
+    font-size: 2.5rem;
+  }
+}
+
+.btn-edit {
+  .svg-inline--fa {
+    font-size: 1.7rem;
+  }
+}
