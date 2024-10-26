@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('auth', {
         await sessionStore.checkLoggedIn();
       } catch (error) {
         console.error('Erreur de connexion:', error);
+        throw error;
       }
     },
 

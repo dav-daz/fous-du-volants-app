@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from "vue";
 
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
 import { useSessionStore } from '@/store/session';
 const sessionStore = useSessionStore();
 
@@ -11,14 +14,28 @@ sessionStore.checkLoggedIn();
 
 let email = ref("");
 let password = ref("");
+let isSuccess = ref(false);
+let message = ref("");
 
 const login = async () => {
-  await authStore.login(email.value, password.value);
+  try {
+    await authStore.login(email.value, password.value);
+    isSuccess.value = true;
+    message.value = "Connexion réussie! Redirection en cours...";
+    setTimeout(() => {
+      router.push('/');
+    }, 5000);
+  } catch (error) {
+    console.error('Erreur de connexion:', error);
+  }
 }
 </script>
 
 <template>
-<form class="form-connect">
+	 <div v-if="isSuccess">
+    <p>{{ message }}</p>
+  </div>
+<form v-else class="form-connect">
   <div class="form-item">
 		<label for="email"> E-mail: </label>
 		<input type="email" id="email" v-model="email">

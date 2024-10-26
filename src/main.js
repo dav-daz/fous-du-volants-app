@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import { routes } from './routes.js';
+import { routes, routeGuard  } from './routes.js';
 
 // font-awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -17,7 +17,9 @@ const pinia = createPinia()
 const router = createRouter({
   history: createWebHistory(),
   routes
-})
+});
+
+routeGuard(router);
 
 const app = createApp(App)
 
