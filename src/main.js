@@ -7,10 +7,10 @@ import { routes, routeGuard  } from './routes.js';
 // font-awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faUserPlus, faUserMinus, faXmark, faTrash, faSquarePlus, faSquareMinus, faPlus, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faUserMinus, faXmark, faTrash, faSquarePlus, faSquareMinus, faPlus, faBars, faPen } from "@fortawesome/free-solid-svg-icons";
 
 
-library.add(faUserPlus, faUserMinus, faXmark, faTrash, faSquarePlus, faSquareMinus, faPlus, faBars);
+library.add(faUserPlus, faUserMinus, faXmark, faTrash, faSquarePlus, faSquareMinus, faPlus, faBars, faPen);
 
 const pinia = createPinia()
 

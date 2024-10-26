@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 
-import { supabase } from '@/lib/supabaseClient';
 import toggleTheme from "@/components/toggleTheme.vue";
 
 import { useSessionStore } from '@/store/session';
@@ -21,18 +20,6 @@ const isMenuOpen = ref(false);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
-
-const getJoueurs = async () => {
-    try {
-      let { data: Joueurs, error } = await supabase.from('Joueurs').select('*')
-    
-      console.log(Joueurs)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  //getJoueurs()
 
 watch(isMenuOpen, (newValue) => {
   if (newValue) {
@@ -65,6 +52,9 @@ watch(isMenuOpen, (newValue) => {
           </li>
           <li>
             <RouterLink to="/">Joueurs et matchs</RouterLink>
+          </li>
+          <li v-if="sessionStore.isLoggedIn">
+            <RouterLink to="/admin-players">Admin Joueurs</RouterLink>
           </li>
         </ul>
 
