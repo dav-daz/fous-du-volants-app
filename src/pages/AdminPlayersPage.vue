@@ -1,37 +1,27 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted } from 'vue';
+import FormAddPlayer from '@/components/FormAddPlayer.vue';
 
-import { supabase } from '@/lib/supabaseClient';
+import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
+const store = useSupabasePlayerStore();
 
-const Joueurs = ref([]);
-
-const getJoueurs = async () => {
-  try {
-    const { data, error } = await supabase
-     .from('Joueurs')
-     .select('*')
-     .order('nom', { ascending: true });
-
-    if (error) {
-      console.log(error);
-    } else {
-      Joueurs.value = data;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-getJoueurs();
+onMounted(async () => {
+  await store.fetchPlayers();
+});
 </script>
 
 <template>
   <div class="content-page">
     <h1>Gestion des joueurs</h1>
 
+    <div class="add-player">
+      <FormAddPlayer />  
+    </div>
+    
+    <h2>Liste des joueurs</h2>
     <ul>
-      <li v-for="player in Joueurs" :key="player.id" class="players-list">
-        {{ player.nom }}
+      <li v-for="player in store.getAllPlayers" :key="player.id" class="players-list">
+        {{ player.prenom }}
 
         <div class="players-list-actions">
           <button class="btn-icon btn-delete" 
@@ -51,6 +41,10 @@ getJoueurs();
 </template>
 
 <style lang="scss" scoped>
+.add-player {
+  margin: 3rem 0;
+}
+
 .players-list {
   margin: 2.5rem 0;
   display: flex;
