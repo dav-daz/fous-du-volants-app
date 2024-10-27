@@ -11,7 +11,7 @@ let prenom = ref("");
 <form class="form-add-player">
   <div class="form-content">
     <div class="form-item">
-      <label for="email">Prénom: </label>
+      <label for="prenom">Prénom: </label>
       <input type="text" id="prenom" v-model="prenom">
     </div>
 
