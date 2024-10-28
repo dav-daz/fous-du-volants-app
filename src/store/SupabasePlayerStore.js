@@ -39,12 +39,16 @@ export const useSupabasePlayerStore = defineStore('players', {
     async removePlayer(id) {
       try {
         const { error } = await supabase.from('Joueurs').delete().eq('id', id);
+
         if (error) {
           throw error;
         }
+
         this.players = this.players.filter(player => player.id!== id);
+
       } catch (error) {
         console.error('Erreur lors de la suppression du joueur:', error);
+        alert('Erreur lors de la suppression du joueur. Veuillez réessayer.');
       }
     },
 

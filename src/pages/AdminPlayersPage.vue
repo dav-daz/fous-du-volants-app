@@ -8,6 +8,12 @@ const store = useSupabasePlayerStore();
 onMounted(async () => {
   await store.fetchPlayers();
 });
+
+function confirmDeletePlayer(prenom, id) {
+  if (confirm(`Êtes-vous sûr de vouloir supprimer le joueur "${prenom}" ?`)) {
+    store.removePlayer(id);
+  }
+}
 </script>
 
 <template>
@@ -25,7 +31,7 @@ onMounted(async () => {
 
         <div class="players-list-actions">
           <button class="btn-icon btn-delete" 
-                  type="button">
+                  type="button" @click="confirmDeletePlayer(player.prenom, player.id)">
             <fa-icon icon="trash" />
           </button>
 
