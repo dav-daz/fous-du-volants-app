@@ -8,6 +8,10 @@
   const tabsStore = useTabsStore();
 
   import { usePlayersStore } from "@/store/players.js";
+
+
+  import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
+  const store = useSupabasePlayerStore();
   
   //Sert à détecter les changements du store playersStore défini au-dessus
   const { playersSelected } = storeToRefs(usePlayersStore());
@@ -20,7 +24,7 @@
             :class="{ 'selected' : tabsStore.currentTab === 'players'}" 
             @click="tabsStore.tabSelect('players')">
       {{ content.tabs.players }}
-      <span v-if="playersSelected.length" class="badge">{{ playersSelected.length }}</span>
+      <span v-if="store.players.length" class="badge">{{ store.players.length }}</span>
     </button>
 
     <button class="btn btn-icon" 

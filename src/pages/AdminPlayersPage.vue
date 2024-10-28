@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, watch  } from 'vue';
 import FormAddPlayer from '@/components/FormAddPlayer.vue';
 
 import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';

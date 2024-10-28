@@ -27,10 +27,19 @@ export const useSupabasePlayerStore = defineStore('players', {
     async addPlayer(player) {
       try {
         const { data, error } = await supabase.from('Joueurs').insert([player]);
+
         if (error) {
           throw error;
         }
-        this.players.push(data[0]);
+        
+        console.log('Réponse de Supabase après insertion:', data, error);
+        
+        if (data && data.length > 0) {
+          this.players.push(data[0]);
+        } else {
+          // Utiliser les données d'origine du joueur si aucune donnée n'est retournée
+          this.players.push(player);
+        }
       } catch (error) {
         console.error('Erreur lors de l\'ajout du joueur:', error);
       }
