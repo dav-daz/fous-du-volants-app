@@ -2,19 +2,19 @@
   import content from '@/data/content.json';
 
   //On importe storeToRefs pour écouter les changements
-  import { storeToRefs } from "pinia";
+  //import { storeToRefs } from "pinia";
 
   import { useTabsStore } from "@/store/tabs.js";
   const tabsStore = useTabsStore();
 
-  import { usePlayersStore } from "@/store/players.js";
+  //import { usePlayersStore } from "@/store/players.js";
 
 
   import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
   const store = useSupabasePlayerStore();
   
   //Sert à détecter les changements du store playersStore défini au-dessus
-  const { playersSelected } = storeToRefs(usePlayersStore());
+  //const { playersSelected } = storeToRefs(usePlayersStore());
 </script>
 
 <template>
