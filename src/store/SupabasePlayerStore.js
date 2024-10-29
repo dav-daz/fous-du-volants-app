@@ -63,14 +63,21 @@ export const useSupabasePlayerStore = defineStore('players', {
 
     async editPlayer(id, updatedPlayer) {
       try {
-        const { data, error } = await supabase.from('Joueurs').update({...updatedPlayer }).eq('id', id);
+        const { data, error } = await supabase
+        .from('Joueurs')
+        .update({...updatedPlayer })
+        .eq('id', id);
+
         if (error) {
           throw error;
         }
+
         const index = this.players.findIndex(player => player.id === id);
+
         if (index!== -1) {
           this.players[index] = {...this.players[index],...updatedPlayer };
         }
+
       } catch (error) {
         console.error('Erreur lors de la mise à jour du joueur:', error);
       }

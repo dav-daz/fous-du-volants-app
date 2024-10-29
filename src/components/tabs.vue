@@ -1,4 +1,5 @@
 <script setup>
+  import { computed } from 'vue';
   import content from '@/data/content.json';
 
   //On importe storeToRefs pour écouter les changements
@@ -15,6 +16,9 @@
   
   //Sert à détecter les changements du store playersStore défini au-dessus
   //const { playersSelected } = storeToRefs(usePlayersStore());
+
+  // propriété calculée pour mettre à jour selectedCount
+  const selectedCount = computed(() => store.players.filter(player => player.selected).length);
 </script>
 
 <template>
@@ -24,7 +28,7 @@
             :class="{ 'selected' : tabsStore.currentTab === 'players'}" 
             @click="tabsStore.tabSelect('players')">
       {{ content.tabs.players }}
-      <span v-if="store.players.length" class="badge">{{ store.players.length }}</span>
+      <span v-if="selectedCount" class="badge">{{ selectedCount }}</span>
     </button>
 
     <button class="btn btn-icon" 

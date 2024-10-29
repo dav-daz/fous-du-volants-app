@@ -10,8 +10,8 @@ import { onMounted } from 'vue';
   const store = useSupabasePlayerStore();
 
   onMounted(async () => {
-  await store.fetchPlayers();
-});
+    await store.fetchPlayers();
+  });
 </script>
 
 <template>
@@ -25,13 +25,13 @@ import { onMounted } from 'vue';
       <div v-bind:class="{selected: player.selected}" class="person-card">
         <p class="person-card-name">{{ player.prenom }}</p>
         <div class="person-card-buttons">
-          <button @click="playersStore.addPlayer(player)" 
+          <button @click="store.editPlayer(player.id, { selected: true })" 
                   class="person-card-buttons-button add btn-icon" 
                   type="button">
             <fa-icon icon="user-plus" size="2x" />
           </button>
 
-          <button @click="playersStore.deletePlayer(player)" 
+          <button @click="store.editPlayer(player.id, { selected: false })" 
                   class="person-card-buttons-button delete btn-icon" 
                   type="button">
             <fa-icon icon="user-minus" size="2x" />
