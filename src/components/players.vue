@@ -22,8 +22,8 @@ import { onMounted } from 'vue';
         :key="player.id"
         class="all-persons-list-item">
 
-      <div v-bind:class="{selected: player.selected}" class="person-card">
-        <p class="person-card-name">{{ player.prenom }}</p>
+      <div v-bind:class="{selected: player.selected, invite: player.invite}" class="person-card">
+        <p class="person-card-name">{{ player.prenom }} <span v-if="player.invite">*</span></p>
         <div class="person-card-buttons">
           <button @click="store.editPlayer(player.id, { selected: true })" 
                   class="person-card-buttons-button add btn-icon" 

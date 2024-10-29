@@ -6,7 +6,7 @@ import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
 const store = useSupabasePlayerStore();
 
 onMounted(async () => {
-  await store.fetchPlayers();
+  await store.fetchPlayers({ invite: false });
 });
 
 function confirmDeletePlayer(prenom, id) {

@@ -8,7 +8,7 @@ let prenom = ref("");
 
 async function addPlayer() {
   if (prenom.value) {
-    const newPlayer = { prenom: prenom.value };
+    const newPlayer = [{ prenom: prenom.value }];
 
     /*
     Si plusieurs champs :
@@ -16,7 +16,7 @@ async function addPlayer() {
     */
 
     await store.addPlayer(newPlayer);
-    await store.fetchPlayers(); // Rafraîchir la liste des joueurs
+    await store.fetchPlayers({ invite: false }); // Rafraîchir la liste des joueurs
 
     prenom.value = "";
   } else {

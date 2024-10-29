@@ -7,17 +7,23 @@ export const useSupabasePlayerStore = defineStore('players', {
   }),
 
   actions: {
-    async fetchPlayers() {
+    async fetchPlayers(filters = {}) {
       try {
-        const { data, error } = await supabase
-          .from('Joueurs')
-          .select('*')
-          .order('prenom', { ascending: true });
-
+        let query = supabase.from('Joueurs').select('*').order('prenom', { ascending: true });
+    
+        // Appliquer les filtres dynamiques
+        for (const [field, value] of Object.entries(filters)) {
+          if (value!== null && value!== undefined) {
+            query = query.eq(field, value);
+          }
+        }
+    
+        const { data, error } = await query;
+    
         if (error) {
           throw error;
         }
-
+    
         this.players = data;
       } catch (error) {
         console.error('Erreur lors de la récupération des joueurs:', error);
@@ -26,7 +32,7 @@ export const useSupabasePlayerStore = defineStore('players', {
 
     async addPlayer(player) {
       try {
-        const { data, error } = await supabase.from('Joueurs').insert([player]);
+        const { data, error } = await supabase.from('Joueurs').insert(player);
 
         if (error) {
           throw error;
@@ -35,10 +41,10 @@ export const useSupabasePlayerStore = defineStore('players', {
         console.log('Réponse de Supabase après insertion:', data, error);
         
         if (data && data.length > 0) {
-          this.players.push(data[0]);
+          this.players.push(...data);
         } else {
           // Utiliser les données d'origine du joueur si aucune donnée n'est retournée
-          this.players.push(player);
+          this.players.push(...player);
         }
       } catch (error) {
         console.error('Erreur lors de l\'ajout du joueur:', error);
