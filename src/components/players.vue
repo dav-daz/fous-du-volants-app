@@ -1,28 +1,37 @@
 <script setup>
-  import tools from "@/components/tools.vue";
-  import { usePlayersStore } from "@/store/players.js";
+import { onMounted } from 'vue';
 
-  const playersStore = usePlayersStore();
+  import tools from "@/components/tools.vue";
+
+  //import { usePlayersStore } from "@/store/players.js";
+  //const playersStore = usePlayersStore();
+
+  import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
+  const store = useSupabasePlayerStore();
+
+  onMounted(async () => {
+    await store.fetchPlayers();
+  });
 </script>
 
 <template>
   <tools />
 
   <ul class="all-persons-list">
-    <li v-for="player in playersStore.registeredPersons"
+    <li v-for="player in store.players"
         :key="player.id"
         class="all-persons-list-item">
 
-      <div v-bind:class="{selected: playersStore.playersSelected.find(el => el.id == player.id)}" class="person-card">
-        <p class="person-card-name">{{ player.nom }}</p>
+      <div v-bind:class="{selected: player.selected}" class="person-card">
+        <p class="person-card-name">{{ player.prenom }}</p>
         <div class="person-card-buttons">
-          <button @click="playersStore.addPlayer(player)" 
+          <button @click="store.editPlayer(player.id, { selected: true })" 
                   class="person-card-buttons-button add btn-icon" 
                   type="button">
             <fa-icon icon="user-plus" size="2x" />
           </button>
 
-          <button @click="playersStore.deletePlayer(player)" 
+          <button @click="store.editPlayer(player.id, { selected: false })" 
                   class="person-card-buttons-button delete btn-icon" 
                   type="button">
             <fa-icon icon="user-minus" size="2x" />

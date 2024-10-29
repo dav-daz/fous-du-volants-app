@@ -27,10 +27,19 @@ export const useSupabasePlayerStore = defineStore('players', {
     async addPlayer(player) {
       try {
         const { data, error } = await supabase.from('Joueurs').insert([player]);
+
         if (error) {
           throw error;
         }
-        this.players.push(data[0]);
+        
+        console.log('Réponse de Supabase après insertion:', data, error);
+        
+        if (data && data.length > 0) {
+          this.players.push(data[0]);
+        } else {
+          // Utiliser les données d'origine du joueur si aucune donnée n'est retournée
+          this.players.push(player);
+        }
       } catch (error) {
         console.error('Erreur lors de l\'ajout du joueur:', error);
       }
@@ -54,14 +63,21 @@ export const useSupabasePlayerStore = defineStore('players', {
 
     async editPlayer(id, updatedPlayer) {
       try {
-        const { data, error } = await supabase.from('Joueurs').update({...updatedPlayer }).eq('id', id);
+        const { data, error } = await supabase
+        .from('Joueurs')
+        .update({...updatedPlayer })
+        .eq('id', id);
+
         if (error) {
           throw error;
         }
+
         const index = this.players.findIndex(player => player.id === id);
+
         if (index!== -1) {
           this.players[index] = {...this.players[index],...updatedPlayer };
         }
+
       } catch (error) {
         console.error('Erreur lors de la mise à jour du joueur:', error);
       }
