@@ -2,20 +2,20 @@
   import content from '@/data/content.json';
 
   import { reactive } from "vue";
+
   import { useToolsStore } from "@/store/tools.js";
   const toolsStore = useToolsStore();
 
-  import { usePlayersStore } from "@/store/players.js";
-  const playersStore = usePlayersStore();
-
-  const texts = toolsStore.texts;
+  import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
+  const store = useSupabasePlayerStore();
 
   const newPlayersTemp = reactive([
-        {
-          id: Date.now(),
-          nom: ''
-        }
-      ]);
+  {
+      prenom: '',
+      invite: true,
+      selected: true
+    }
+  ]);
 
   function closeModal() {
     toolsStore.showModal = false;
@@ -23,13 +23,20 @@
 
   function addField(player) {
     newPlayersTemp.push({
-      id: Date.now(),
-      nom: player.nom
+      prenom: player.prenom,
+      invite: true,
+      selected: true
     });
   }
 
   function removeField(index) {
     newPlayersTemp.splice(index, 1);
+  }
+
+  async function addInvite(players) {
+    await store.addPlayer(players);
+    await store.fetchPlayers(); // Rafraîchir la liste des joueurs
+    toolsStore.showModal = false;
   }
 
 </script>
@@ -42,7 +49,7 @@
         :key="k"
         class="add-player-input"
     >
-      <input v-model="newPlayer.nom" type="text" placeholder="Nom du joueur"/>
+      <input v-model="newPlayer.prenom" type="text" placeholder="Prénom du joueur"/>
       <!-- Remove botton -->
       <button v-show="newPlayersTemp.length > 1" 
               @click="removeField(k)" 
@@ -51,8 +58,8 @@
       </button>
 
       <!-- Add button -->
-      <button v-show="(k == newPlayersTemp.length-1)&&(newPlayer.nom != '')" 
-              @click="addField(newPlayer.nom)"
+      <button v-show="(k == newPlayersTemp.length-1)&&(newPlayer.prenom != '')" 
+              @click="addField(newPlayer.prenom)"
               type="button" 
               class="btn-icon btn-add"><fa-icon icon="square-plus" />
       </button>
@@ -66,8 +73,8 @@
       </button>
       
       <button 
-            v-if="newPlayersTemp[0].nom != ''"
-            @click="playersStore.addNewPlayers(newPlayersTemp)"
+            v-if="newPlayersTemp[0].prenom != ''"
+            @click="addInvite(newPlayersTemp)"
             class="modal-btn"
             type="button"
             v-html="content.button.add_to_list">
