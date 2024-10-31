@@ -51,15 +51,27 @@ export const useSupabasePlayerStore = defineStore('players', {
       }
     },
 
-    async removePlayer(id) {
+    async removePlayer(playerId, filterColumn, filterValue) {
       try {
-        const { error } = await supabase.from('Joueurs').delete().eq('id', id);
+        let query = supabase
+        .from('Joueurs')
+        .delete();
+
+        if (playerId === null) {
+          query = query.eq(filterColumn, filterValue);
+        } else {
+          query = query.eq('id', playerId);
+        }
+
+        const { data: updatedPlayers, error } = await query;
 
         if (error) {
           throw error;
         }
 
-        this.players = this.players.filter(player => player.id!== id);
+        if (playerId !== null) {
+          this.players = this.players.filter(player => player.id!== playerId);
+        }
 
       } catch (error) {
         console.error('Erreur lors de la suppression du joueur:', error);
@@ -67,25 +79,37 @@ export const useSupabasePlayerStore = defineStore('players', {
       }
     },
 
-    async editPlayer(id, updatedPlayer) {
+    async editPlayer(playerId, data, filterColumn, filterValue) {
       try {
-        const { data, error } = await supabase
+        let query = supabase
         .from('Joueurs')
-        .update({...updatedPlayer })
-        .eq('id', id);
+        .update(data);
+
+        if (playerId === null) {
+          query = query.eq(filterColumn, filterValue);
+        } else {
+          query = query.eq('id', playerId);
+        }
+
+        const { data: updatedPlayers, error } = await query;
 
         if (error) {
           throw error;
         }
 
-        const index = this.players.findIndex(player => player.id === id);
+
+      if (playerId !== null) {
+        // Mettre à jour le state avec le joueur mis à jour
+        const index = this.players.findIndex(player => player.id === playerId);
 
         if (index!== -1) {
-          this.players[index] = {...this.players[index],...updatedPlayer };
+          this.players[index] = {...this.players[index],...updatedPlayers };
         }
+      }
 
       } catch (error) {
-        console.error('Erreur lors de la mise à jour du joueur:', error);
+        console.error('Erreur lors de la mise à jour des joueurs :', error);
+        throw error;
       }
     }
   },
