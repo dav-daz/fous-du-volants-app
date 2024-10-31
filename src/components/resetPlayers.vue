@@ -3,14 +3,20 @@
 
   import { useToolsStore } from "@/store/tools.js";
   const toolsStore = useToolsStore();
-
-  import { usePlayersStore } from "@/store/players.js";
-  const playersStore = usePlayersStore();
   
-  const texts = toolsStore.texts;
+  import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
+  const playerStoreSupabase  = useSupabasePlayerStore();
 
   function closeModal() {
     toolsStore.showModal = false;
+  }
+
+  async function reset() {
+    await playerStoreSupabase.editPlayer(null, { selected: false }, 'selected', true);
+    await playerStoreSupabase.removePlayer(null, 'invite', true);
+    await playerStoreSupabase.fetchPlayers();
+
+    closeModal()
   }
 </script>
 
@@ -28,7 +34,7 @@
     
     <button
         class="modal-btn"
-        @click="playersStore.reset()"
+        @click="reset"
         v-html="content.button.init_confirm">
     </button>
   </div>

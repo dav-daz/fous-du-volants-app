@@ -12,6 +12,11 @@ import { onMounted } from 'vue';
   onMounted(async () => {
     await store.fetchPlayers();
   });
+
+  const update = async (id, data) => {
+    await store.editPlayer(id, data, null, null);
+    await store.fetchPlayers();
+  }
 </script>
 
 <template>
@@ -25,13 +30,13 @@ import { onMounted } from 'vue';
       <div v-bind:class="{selected: player.selected, invite: player.invite}" class="person-card">
         <p class="person-card-name">{{ player.prenom }} <span v-if="player.invite">*</span></p>
         <div class="person-card-buttons">
-          <button @click="store.editPlayer(player.id, { selected: true })" 
+          <button @click="update(player.id, { selected: true })" 
                   class="person-card-buttons-button add btn-icon" 
                   type="button">
             <fa-icon icon="user-plus" size="2x" />
           </button>
 
-          <button @click="store.editPlayer(player.id, { selected: false })" 
+          <button @click="update(player.id, { selected: false })" 
                   class="person-card-buttons-button delete btn-icon" 
                   type="button">
             <fa-icon icon="user-minus" size="2x" />
