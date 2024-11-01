@@ -116,6 +116,7 @@ export const useSupabasePlayerStore = defineStore('players', {
 
   getters: {
     getAllPlayers: (state) => state.players,
-    getPlayerById: (state) => (id) => state.players.find(player => player.id === id)
+    getPlayerById: (state) => (id) => state.players.find(player => player.id === id),
+    getPlayersSelected: (state) => state.players.filter(player => player.selected === true)
   }
 });
