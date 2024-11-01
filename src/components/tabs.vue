@@ -8,9 +8,6 @@
   import { useTabsStore } from "@/store/tabs.js";
   const tabsStore = useTabsStore();
 
-  //import { usePlayersStore } from "@/store/players.js";
-
-
   import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
   const store = useSupabasePlayerStore();
   

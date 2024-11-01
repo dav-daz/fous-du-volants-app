@@ -3,9 +3,6 @@ import { onMounted } from 'vue';
 
   import tools from "@/components/tools.vue";
 
-  //import { usePlayersStore } from "@/store/players.js";
-  //const playersStore = usePlayersStore();
-
   import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
   const store = useSupabasePlayerStore();
 
