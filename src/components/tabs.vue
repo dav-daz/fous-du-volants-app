@@ -1,17 +1,21 @@
 <script setup>
-  import toggleTheme from "@/components/toggleTheme.vue";
+  import { computed } from 'vue';
   import content from '@/data/content.json';
 
   //On importe storeToRefs pour écouter les changements
-  import { storeToRefs } from "pinia";
+  //import { storeToRefs } from "pinia";
 
   import { useTabsStore } from "@/store/tabs.js";
   const tabsStore = useTabsStore();
 
-  import { usePlayersStore } from "@/store/players.js";
+  import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
+  const store = useSupabasePlayerStore();
   
   //Sert à détecter les changements du store playersStore défini au-dessus
-  const { playersSelected } = storeToRefs(usePlayersStore());
+  //const { playersSelected } = storeToRefs(usePlayersStore());
+
+  // propriété calculée pour mettre à jour selectedCount
+  const selectedCount = computed(() => store.players.filter(player => player.selected).length);
 </script>
 
 <template>
@@ -21,7 +25,7 @@
             :class="{ 'selected' : tabsStore.currentTab === 'players'}" 
             @click="tabsStore.tabSelect('players')">
       {{ content.tabs.players }}
-      <span v-if="playersSelected.length" class="badge">{{ playersSelected.length }}</span>
+      <span v-if="selectedCount" class="badge">{{ selectedCount }}</span>
     </button>
 
     <button class="btn btn-icon" 
@@ -32,7 +36,7 @@
     </div>
 
     <div class="tabs-col-right">
-      <toggleTheme />
+      
     </div>
   </div>
 </template>

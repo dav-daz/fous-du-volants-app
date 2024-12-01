@@ -33,6 +33,10 @@ See [Documentation 1](https://blog.fontawesome.com/how-to-use-vue-js-with-font-a
 ```bash
 npm install pinia
 ```
+### Install Vue Router
+```bash
+npm install vue-router@4
+```
 ### Deploy on github pages
 Cf in ```package.json```
 ```
@@ -47,3 +51,15 @@ git push ; git subtree push --prefix dist origin gh-pages
 ```
 
 ```;``` is for windows powershell, for Linux, replace by ```&&```
+
+### Base de données : Supabase
+#### Install Supabase
+```bash
+npm install @supabase/supabase-js
+```
+
+[Supabase Documentation](https://supabase.com/docs)
+
+Sending mail for user manager (sign up, forget password,...) with Brevo SMTP 
+[Brevo SMTP Documentation](https://developers.brevo.com/docs/smtp-integration)
+[Supabase custom SMTP Documentation](https://supabase.com/docs/guides/auth/auth-smtp)

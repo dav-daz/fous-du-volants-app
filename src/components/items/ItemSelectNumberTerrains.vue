@@ -1,11 +1,16 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 import { useMatchsStore } from "@/store/matchs.js";
 import { storeToRefs } from 'pinia';
 
+import { useSupabasePlayerStore } from '@/store/SupabasePlayerStore.js';
+const supabasePlayerStore = useSupabasePlayerStore();
+
 const matchsStore = useMatchsStore();
 const { maxTerrains } = storeToRefs(matchsStore);
+
+const playersSelected = computed(() => supabasePlayerStore.getPlayersSelected);
 
 const terrainsNumber = ref(maxTerrains.value);
 const tempValue = ref(terrainsNumber.value);
@@ -15,7 +20,7 @@ watch(terrainsNumber, (newValue) => {
   if (newValue >= 2 && newValue <= 10) {
     matchsStore.setMaxTerrains(newValue);
     tempValue.value = newValue;
-    matchsStore.init(JSON.parse(window.localStorage.getItem('players')).playersSelected);
+    matchsStore.init(playersSelected.value);
   }
 });
 

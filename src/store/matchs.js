@@ -66,7 +66,7 @@ export const useMatchsStore = defineStore('matchs', {
                   for (let team = 0; team < 2; team++) {
                     for (let player = 0; player < 2; player++) {
                       if (playerIndex < shuffledPlayers.length) {
-                        match[team].push(shuffledPlayers[playerIndex]?.nom || 'Joueur inconnu');
+                        match[team].push(shuffledPlayers[playerIndex]?.prenom || 'Joueur inconnu');
                         playerIndex++;
                       }
                     }
@@ -77,7 +77,7 @@ export const useMatchsStore = defineStore('matchs', {
                   let court = [];
                   for (let j = 0; j < parseInt(courtType.substring(1)); j++) {
                     if (playerIndex < shuffledPlayers.length) {
-                      court.push(shuffledPlayers[playerIndex]?.nom || 'Joueur inconnu');
+                      court.push(shuffledPlayers[playerIndex]?.prenom || 'Joueur inconnu');
                       playerIndex++;
                     }
                   }
@@ -110,13 +110,13 @@ export const useMatchsStore = defineStore('matchs', {
 
             for (var j = 0; j <= 1; j++) {
               this.shuffleArray(playersArray);
-              match[g][i][j] = playersArray.pop().nom;
+              match[g][i][j] = playersArray.pop().prenom;
             }
           }
         } else {
           for (var i = 0; i <= numberPlayers-1; i++) {
             this.shuffleArray(playersArray);
-            match[g][i] = playersArray.pop().nom;
+            match[g][i] = playersArray.pop().prenom;
           }
         }
       }
