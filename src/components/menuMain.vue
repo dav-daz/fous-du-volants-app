@@ -13,6 +13,8 @@ sessionStore.checkLoggedIn();
 
 const logout = async () => {
   await authStore.logout();
+
+  toggleMenu()
 }
 
 const isMenuOpen = ref(false);
@@ -40,26 +42,29 @@ watch(isMenuOpen, (newValue) => {
    <Transition name="slide-fade">
       <div v-show="isMenuOpen" class="menu-main-content">
         <div class="menu-main-top">
+          <div class="connect">
+            <RouterLink class="login" v-if="!sessionStore.isLoggedIn" to="/sign-in" @click="toggleMenu">
+              <fa-icon icon="right-to-bracket" />
+              <span class="visually-hidden">Se connecter</span>
+            </RouterLink>
+
+            <RouterLink class="logout" v-else to="/" @click="logout">
+              <fa-icon icon="right-from-bracket" />
+              <span class="visually-hidden">Se déconnecter</span>
+            </RouterLink>
+          </div>
+
           <toggleTheme />
         </div>
         
         <ul class="main-navigation">
-          <li v-if="!sessionStore.isLoggedIn">
-            <RouterLink to="/sign-in">Se connecter</RouterLink>
-          </li>
-          <li v-if="!sessionStore.isLoggedIn">
-            <RouterLink to="/sign-up">Créer un compte</RouterLink>
-          </li>
           <li>
-            <RouterLink to="/">Joueurs et matchs</RouterLink>
+            <RouterLink to="/" @click="toggleMenu">Joueurs et matchs</RouterLink>
           </li>
           <li v-if="sessionStore.isLoggedIn">
-            <RouterLink to="/admin-players">Admin Joueurs</RouterLink>
+            <RouterLink to="/admin-players" @click="toggleMenu">Admin Joueurs</RouterLink>
           </li>
         </ul>
-
-        <button v-if="sessionStore.isLoggedIn" @click="logout">Se déconnecter</button>
-
       </div>
     </Transition>
     <button class="btn-icon menu-main-toggle" @click="toggleMenu" type="button">
@@ -108,7 +113,29 @@ watch(isMenuOpen, (newValue) => {
    }
 
    &-top {
+    display: flex;
+    justify-content: space-between;
     text-align: right;
+
+    .login,
+    .logout {
+      display: block;
+      width: 2.5rem;
+      height: 2.5rem;
+
+      .svg-inline--fa {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .login {
+      color: var(--green);
+    }
+
+    .logout {
+      color: var(--red);
+    }
    }
 
    &.open {
