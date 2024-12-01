@@ -41,7 +41,7 @@ function update(id, data, index) {
       <FormAddPlayer />  
     </div>
     
-    <h2>Liste des joueurs</h2>
+    <h2>Liste des joueurs ({{ store.getPlayersNotInvited.length }})</h2>
     <ul>
       <li v-for="(player, index) in store.getPlayersNotInvited" :key="player.id" class="players-list">
         <input :disabled="isDisabled[index]" 

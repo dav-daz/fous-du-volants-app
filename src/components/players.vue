@@ -24,19 +24,26 @@ import { onMounted } from 'vue';
         :key="player.id"
         class="all-persons-list-item">
 
-      <div v-bind:class="{selected: player.selected, invite: player.invite}" class="person-card">
-        <p class="person-card-name">{{ player.prenom }} <span v-if="player.invite">*</span></p>
+      <div :class="{selected: player.selected, invite: player.invite}" class="person-card">
+        <p class="person-card-name">
+          {{ player.prenom }}
+        </p>
+
         <div class="person-card-buttons">
           <button @click="update(player.id, { selected: true })" 
                   class="person-card-buttons-button add btn-icon" 
                   type="button">
+
             <fa-icon icon="user-plus" size="2x" />
+            <span class="visually-hidden">Ajouter le joueur</span>
           </button>
 
           <button @click="update(player.id, { selected: false })" 
                   class="person-card-buttons-button delete btn-icon" 
                   type="button">
+
             <fa-icon icon="user-minus" size="2x" />
+            <span class="visually-hidden">Enlever le joueur</span>
           </button>
         </div>
       </div>
@@ -101,6 +108,10 @@ import { onMounted } from 'vue';
       .delete {
         display: inline-block;
       }
+    }
+
+    &.invite {
+      opacity: 0.5;
     }
   }
 }
